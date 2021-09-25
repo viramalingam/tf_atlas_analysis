@@ -1,12 +1,9 @@
 version 1.0
 
 task hello {
-  input {
-    String name
-  }
 
   command {
-    echo 'hello ${name}!'
+    echo 'hello'
   }
   output {
     File response = stdout()
