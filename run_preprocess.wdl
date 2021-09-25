@@ -4,6 +4,8 @@ task hello {
 
   command {
     echo $PWD
+    ls \
+    ls ~
     echo 'adda'	
   }
   output {
