@@ -4,9 +4,10 @@ task hello {
 
   command {
     echo $PWD
-    ls /
     cd /
-    ls ~
+    mkdir my_data
+    cd /scratch/
+    ls
     echo 'adda'	
   }
   output {
