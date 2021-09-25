@@ -3,7 +3,7 @@ version 1.0
 task hello {
 
   command {
-    echo 'hello'
+    echo '$PWD'
   }
   output {
     File response = stdout()
