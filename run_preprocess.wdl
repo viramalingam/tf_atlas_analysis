@@ -9,7 +9,7 @@ task hello {
     File response = stdout()
   }
   runtime {
-   docker: 'vivekramalingam:tf-atlas'
+   docker: 'vivekramalingam/tf-atlas'
   }
 }
 
