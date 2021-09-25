@@ -4,6 +4,7 @@ task hello {
 
   command {
     echo $PWD
+    echo 'adda'	
   }
   output {
     File response = stdout()
