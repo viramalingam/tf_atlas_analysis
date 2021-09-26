@@ -1,11 +1,12 @@
 version 1.0
 
 task run_preprocess {
-  String experiment
-  String gcp_bucket
-  String pipeline_destination
-  File metadata
-
+    input {
+    String experiment
+    String gcp_bucket
+    String pipeline_destination
+    File metadata
+  }	
   command {
     cd /; mkdir my_data
     cd /scratch/
