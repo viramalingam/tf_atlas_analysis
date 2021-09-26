@@ -12,7 +12,7 @@ task run_preprocess {
     cd /scratch/
     git clone https://github.com/viramalingam/tf_atlas_analysis.git
     cd tf_atlas_analysis
-    sudo chmod 777 run_preprocess.sh
+    chmod 777 run_preprocess.sh
     echo "run ./run_preprocess.sh" 
     ./run_preprocess.sh
   }
