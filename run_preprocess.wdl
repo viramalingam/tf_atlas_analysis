@@ -25,9 +25,7 @@ task run_preprocess {
 
 workflow preprocess {
   String experiment
-  String? gcp_bucket 
-  String gcp_bucket = select_first([gcp_bucket, "gbsc-gcp-lab-kundaje-tf-atlas"])
-
+  String gcp_bucket 
   String pipeline_destination
   File metadata
 
