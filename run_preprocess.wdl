@@ -25,10 +25,12 @@ task run_preprocess {
 }
 
 workflow preprocess {
-  String experiment
-  String gcp_bucket 
-  String pipeline_destination
-  File metadata
+  input {
+	String experiment
+  	String gcp_bucket 
+  	String pipeline_destination
+  	File metadata
+  }
 
   call run_preprocess {
     input:
