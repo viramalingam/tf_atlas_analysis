@@ -1,5 +1,5 @@
 #/bin/bash
-
-echo $0
-echo $5
+echo params
+echo $1
+echo $2
 echo 'success'
