@@ -14,7 +14,7 @@ task run_preprocess {
     cd tf_atlas_analysis
     chmod 777 run_preprocess.sh
     echo "run ./run_preprocess.sh" 
-    ./run_preprocess.sh
+    ./run_preprocess.sh experiment metadata
   }
   output {
     File response = stdout()
