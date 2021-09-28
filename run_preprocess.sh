@@ -68,17 +68,3 @@ python \
     $gcp_bucket \
     params_file.json
 
-# if the pipeline params json was generated successfully
-if [ -f pipeline_params_$experiment.json ]
-then
-    # run the main pipeline script
-    echo $( timestamp ): "./pipeline.sh" pipeline_params_$experiment.json \
-    $encode_access_key $encode_secret_key $pipeline_destination | \
-    tee -a $logfile
-    
-    ./pipeline.sh pipeline_params_$experiment.json $encode_access_key \
-    $encode_secret_key $pipeline_destination
-else
-    echo $( timestamp ): Could not "find" pipeline params json. \
-    Aborting. | tee -a $logfile
-fi
