@@ -24,7 +24,6 @@ task run_preprocess {
 		./run_preprocess.sh ${experiment} ${tuning} ${learning_rate} ${counts_loss_weight} ${epochs} ${encode_access_key} ${encode_secret_key} ${gcp_bucket} ${pipeline_destination} ${metadata}
 	
 	output {
-		File response = stdout()
 		File params_json = "params_file.json"
 	}
 	runtime {
