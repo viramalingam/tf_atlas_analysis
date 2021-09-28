@@ -3,8 +3,8 @@ version 1.0
 task run_preprocess {
 	input {
 		String experiment
-		Int tuning
-		Int learning_rate
+		String tuning
+		Float learning_rate
 		Int counts_loss_weight
 		Int epochs
 		String encode_access_key
@@ -36,8 +36,8 @@ task run_preprocess {
 workflow preprocess {
 	input {
 		String experiment
-		Int tuning
-		Int learning_rate
+		String tuning
+		Float learning_rate
 		Int counts_loss_weight
 		Int epochs
 		String encode_access_key
