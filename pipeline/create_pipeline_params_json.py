@@ -1,12 +1,3 @@
-
-"""
-    Python script to create the pipeline params json for each
-    ENCODE experiment.
-    
-    The script takes the metadata file path and the experiment
-    accession id as input
-"""
-
 import os
 import pandas as pd
 import sys
@@ -26,6 +17,7 @@ learning_rate=sys.argv[10]
 counts_loss_weight=sys.argv[11]
 epochs=sys.argv[12]
 gcp_bucket=sys.argv[13]
+params_json_outfile=sys.argv[14]
 
 def make_string(pandas_col_obj):
     """
@@ -90,5 +82,5 @@ params_dict['epochs'] = epochs
 params_dict['gcp_bucket'] = gcp_bucket
 
 # write python dictionary to json file
-with open("pipeline_params_{}.json".format(experiment_id), "w") as outfile:  
+with open(params_json_outfile) as outfile:  
     json.dump(params_dict, outfile, indent='\t')
