@@ -65,5 +65,8 @@ workflow preprocess {
 			pipeline_destination = pipeline_destination,
 			metadata = metadata	
  	}
+	output {
+		File params_json = run_preprocess.params_json
 
+	}
 }
