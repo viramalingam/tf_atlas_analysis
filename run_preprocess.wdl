@@ -20,7 +20,8 @@ task run_preprocess {
 		git clone https://github.com/viramalingam/tf_atlas_analysis.git
 		cd tf_atlas_analysis
 		chmod 777 run_preprocess.sh
-		echo "run ./run_preprocess.sh" 
+		echo "run ./run_preprocess.sh"
+		echo "metadata path: ${metadata}" 
 		./run_preprocess.sh ${experiment} ${tuning} ${learning_rate} ${counts_loss_weight} ${epochs} ${encode_access_key} ${encode_secret_key} ${gcp_bucket} ${pipeline_destination} ${metadata}
 	
 	output {

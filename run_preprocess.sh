@@ -5,7 +5,7 @@
 # This script assumes that the present working directory is the 
 # git cloned TF-Atlas repo folder
 
-. pipeline/utils.sh
+source pipeline/utils.sh
 
 # command line params
 experiment=$1
@@ -48,8 +48,8 @@ python \\
     $learning_rate \\
     $counts_loss_weight \\
     $epochs \\
-    $gcp_bucket" \\
-    params_file.json | tee -a $logfile
+    $gcp_bucket \\
+    params_file.json" | tee -a $logfile
     
 python \
     create_pipeline_params_json.py \
