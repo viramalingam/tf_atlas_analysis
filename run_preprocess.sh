@@ -19,7 +19,7 @@ encode_secret_key=$7
 #gbsc-gcp-lab-kundaje-tf-atlas
 gcp_bucket=$8
 pipeline_destination=$9
-metadata_file_path=$10
+metadata_file_path=${10}
 
 # create the log file
 logfile=$PWD/$experiment.log
@@ -48,7 +48,7 @@ python \\
     $learning_rate \\
     $counts_loss_weight \\
     $epochs \\
-    $gcp_bucket"\\
+    $gcp_bucket" \\
     params_file.json | tee -a $logfile
     
 python \
