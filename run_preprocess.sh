@@ -19,13 +19,13 @@ encode_secret_key=$7
 #gbsc-gcp-lab-kundaje-tf-atlas
 gcp_bucket=$8
 pipeline_destination=$9
+metadata_file_path=$10
 
 # create the log file
 logfile=$PWD/$experiment.log
 touch $logfile
 
 # path to the metadata file in the Tf-Atlas folder
-metadata_file_path=$PWD/data/metadata.tsv
 echo $( timestamp ): "metadata_file_path - " $metadata_file_path | \
 tee -a $logfile
 
@@ -35,7 +35,7 @@ cd pipeline
 # create pipeline params json
 echo $( timestamp ): "
 python \\
-    cerate_pipeline_params_json.py \\
+    create_pipeline_params_json.py \\
     $metadata_file_path \\
     $experiment \\
     True \\
@@ -48,7 +48,8 @@ python \\
     $learning_rate \\
     $counts_loss_weight \\
     $epochs \\
-    $gcp_bucket" | tee -a $logfile
+    $gcp_bucket"\\
+    params_file.json | tee -a $logfile
     
 python \
     create_pipeline_params_json.py \
@@ -64,7 +65,8 @@ python \
     $learning_rate \
     $counts_loss_weight \
     $epochs \
-    $gcp_bucket
+    $gcp_bucket \
+    params_file.json
 
 # if the pipeline params json was generated successfully
 if [ -f pipeline_params_$experiment.json ]
