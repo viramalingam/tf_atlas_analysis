@@ -25,7 +25,7 @@ task run_preprocess {
 		echo "metadata path: ${metadata}" 
 		./run_preprocess.sh ${experiment} ${tuning} ${learning_rate} ${counts_loss_weight} ${epochs} ${encode_access_key} ${encode_secret_key} ${gcp_bucket} ${pipeline_destination} ${metadata}
 		ls
-		cp params_file.json /cromwell_root/params_file.json	
+		cp pipeline/params_file.json /cromwell_root/params_file.json	
 	}
 	
 	output {
