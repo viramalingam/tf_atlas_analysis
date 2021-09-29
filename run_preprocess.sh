@@ -8,7 +8,7 @@
 # Step 5. Generate reports
 
 # import the utils script
-source pipeline/utils.sh
+source ./utils.sh
 
 
 
@@ -111,9 +111,11 @@ echo $( timestamp ): "mkdir" $bigWigs_dir | tee -a $logfile
 mkdir $bigWigs_dir
 
 
-# Step 1: Copy the reference file
+# Step 1: Copy the reference files
 
-echo $( timestamp ):"cp" $reference_file $reference_dir/; "cp" $reference_file_index $reference_file_index | \
+echo $( timestamp ): "cp" $reference_file $reference_dir/; | \
+tee -a $logfile 
+echo $( timestamp ): "cp" $reference_file_index $reference_dir/; |\
 tee -a $logfile 
 
 

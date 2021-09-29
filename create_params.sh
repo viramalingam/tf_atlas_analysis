@@ -30,7 +30,6 @@ echo $( timestamp ): "metadata_file_path - " $metadata_file_path | \
 tee -a $logfile
 
 # change directory to the pipeline folder
-cd pipeline
 
 # create pipeline params json
 echo $( timestamp ): "
