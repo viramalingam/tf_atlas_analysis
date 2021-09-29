@@ -113,9 +113,9 @@ mkdir $bigWigs_dir
 
 # Step 1: Copy the reference files
 
-echo $( timestamp ): "cp" $reference_file $reference_dir/; | \
+echo $( timestamp ): "cp" $reference_file $reference_dir/ | \
 tee -a $logfile 
-echo $( timestamp ): "cp" $reference_file_index $reference_dir/; |\
+echo $( timestamp ): "cp" $reference_file_index $reference_dir/ |\
 tee -a $logfile 
 
 

@@ -27,7 +27,7 @@ task run_preprocess {
 		#run the params create script and preprocess script
 		echo "run ../create_params.sh"
 		../create_params.sh ${experiment} ${tuning} ${learning_rate} ${counts_loss_weight} ${epochs} ${encode_access_key} ${encode_secret_key} ${gcp_bucket} ${pipeline_destination} ${metadata}
-		cp pipeline/params_file.json /cromwell_root/params_file.json	#copy the file to the root folder for cromwell to copy
+		cp params_file.json /cromwell_root/params_file.json	#copy the file to the root folder for cromwell to copy
 
 		##preprocessing
 		echo "run ../run_preprocess.sh"
