@@ -134,6 +134,7 @@ download_file "$alignments" "bam" "$alignments_md5sums" 1 $logfile \
 $encode_access_key $encode_secret_key $downloads_dir
 
 du -h -d 2 .
+df -h
 
 if [ "$has_control" = "True" ]
 then
@@ -150,6 +151,8 @@ fi
 # 2.5 download peaks file
 download_file $peaks "bed.gz" $peaks_md5sum 1 $logfile $encode_access_key \
 $encode_secret_key $downloads_dir
+
+df -h
 
 wait_for_jobs_to_finish "Download"
 
