@@ -133,6 +133,8 @@ $encode_secret_key $downloads_dir
 download_file "$alignments" "bam" "$alignments_md5sums" 1 $logfile \
 $encode_access_key $encode_secret_key $downloads_dir
 
+du -h -d 2 .
+
 if [ "$has_control" = "True" ]
 then
     # 2.3 download control unfiltered alignmentsbams

@@ -30,6 +30,7 @@ task run_preprocess {
 		cp params_file.json /cromwell_root/params_file.json	#copy the file to the root folder for cromwell to copy
 
 		df -h
+		du -h -d 2 .
 
 		##preprocessing
 		echo "run ../run_preprocess.sh"
