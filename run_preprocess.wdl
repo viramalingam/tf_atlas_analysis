@@ -30,7 +30,7 @@ task run_preprocess {
 		cp pipeline/params_file.json /cromwell_root/params_file.json	#copy the file to the root folder for cromwell to copy
 
 		##preprocessing
-		chmod 777 run_preprocessing.sh
+		chmod 777 run_preprocess.sh
 		echo "run ./run_preprocess.sh"
 		./run_preprocess.sh params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index}
 		
