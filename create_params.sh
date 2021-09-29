@@ -5,7 +5,7 @@
 # This script assumes that the present working directory is the 
 # git cloned TF-Atlas repo folder
 
-source pipeline/utils.sh
+source ./utils.sh
 
 # command line params
 experiment=$1
