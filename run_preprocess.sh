@@ -117,8 +117,8 @@ echo $( timestamp ):"cp" $reference_file $reference_dir/; "cp" $reference_file_i
 tee -a $logfile 
 
 
-cp $reference_file $reference_dir
-cp $reference_file_index $reference_dir
+cp $reference_file $reference_dir/
+cp $reference_file_index $reference_dir/
 
 # Step 2. download bam files and peaks file
 
