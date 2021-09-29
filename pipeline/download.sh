@@ -80,6 +80,7 @@ while [ $attempt -lt $max_attempts ]; do
         echo $( timestamp ): "md5sum" ${dst_fname} "| cut -d ' ' -f" | \
         tee -a $logfile
         md5=`md5sum ${dst_fname} | cut -d ' ' -f1`
+        echo ${dst_fname}:${md5}
 
         # if the md5 matches download was a success, we quit
         if [ "$md5" = "$md5_sum" ]; then
