@@ -32,7 +32,7 @@ task run_preprocess {
 		##preprocessing
 		chmod 777 run_preprocess.sh
 		echo "run ./run_preprocess.sh"
-		./run_preprocess.sh params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index}
+		./run_preprocess.sh pipeline/params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index}
 		
 	}
 	
