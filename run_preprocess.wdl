@@ -38,6 +38,7 @@ task run_preprocess {
 	output {
 		File params_json = "params_file.json"
 	}
+	
 	runtime {
 		docker: 'vivekramalingam/tf-atlas'
 		memory: 12 + "GB"
