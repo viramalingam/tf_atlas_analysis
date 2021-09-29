@@ -40,7 +40,7 @@ md5sum temp.bam
 
 echo $logfile
 
-ls -l $logfile
+readlink -f $logfile
 
 # check if the file already exists
 if [ -f $dst_fname ]
