@@ -19,7 +19,7 @@ task run_preprocess {
 	command {
 		#create data directories and download scripts
 		cd /; mkdir my_data
-		cd /scratch/
+		cd /my_data
 		git clone https://github.com/viramalingam/tf_atlas_analysis.git
 		chmod -R 777 tf_atlas_analysis
 		cd tf_atlas_analysis/pipeline
