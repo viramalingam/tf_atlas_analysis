@@ -30,10 +30,9 @@ task run_preprocess {
 		cp pipeline/params_file.json /cromwell_root/params_file.json	#copy the file to the root folder for cromwell to copy
 
 		##preprocessing
-		cd /scratch/tf_atlas_analysis/
 		chmod 777 run_preprocessing.sh
-		echo "run ./run_preprocessing.sh"
-		./run_preprocessing.sh params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index}
+		echo "run ./run_preprocess.sh"
+		./run_preprocess.sh params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index}
 		
 	}
 	
