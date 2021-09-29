@@ -21,18 +21,18 @@ task run_preprocess {
 		cd /; mkdir my_data
 		cd /scratch/
 		git clone https://github.com/viramalingam/tf_atlas_analysis.git
-		cd tf_atlas_analysis
+		cd tf_atlas_analysis/pipeline
 
 		#run the params create script and preprocess script
 		chmod 777 create_params.sh
-		echo "run ./create_params.sh"
-		./create_params.sh ${experiment} ${tuning} ${learning_rate} ${counts_loss_weight} ${epochs} ${encode_access_key} ${encode_secret_key} ${gcp_bucket} ${pipeline_destination} ${metadata}
+		echo "run ../create_params.sh"
+		../create_params.sh ${experiment} ${tuning} ${learning_rate} ${counts_loss_weight} ${epochs} ${encode_access_key} ${encode_secret_key} ${gcp_bucket} ${pipeline_destination} ${metadata}
 		cp pipeline/params_file.json /cromwell_root/params_file.json	#copy the file to the root folder for cromwell to copy
 
 		##preprocessing
 		chmod 777 run_preprocess.sh
-		echo "run ./run_preprocess.sh"
-		./run_preprocess.sh pipeline/params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index}
+		echo "run ../run_preprocess.sh"
+		../run_preprocess.sh params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index}
 		
 	}
 	
