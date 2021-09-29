@@ -76,8 +76,8 @@ encode_secret_key=$3
 # --mnt target, or if "gcp" then the files are uploaded to gcp
 pipeline_destination=$4
 
-$reference_file=$5
-$reference_file_index=$6
+reference_file=${5}
+reference_file_index=${6}
 
 # create log file
 logfile=$experiment.log
@@ -113,12 +113,12 @@ mkdir $bigWigs_dir
 
 # Step 1: Copy the reference file
 
-echo $( timestamp ):cp $reference_file $reference_dir/; cp $reference_file_index $reference_file_index | \\
+echo $( timestamp ):"cp" $reference_file $reference_dir/; "cp" $reference_file_index $reference_file_index | \
 tee -a $logfile 
 
 
-cp $reference_file $reference_dir/
-cp $reference_file_index $reference_file_index
+cp $reference_file $reference_dir
+cp $reference_file_index $reference_dir
 
 # Step 2. download bam files and peaks file
 
