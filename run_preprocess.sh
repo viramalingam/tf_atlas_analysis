@@ -133,6 +133,8 @@ $encode_secret_key $downloads_dir
 download_file "$alignments" "bam" "$alignments_md5sums" 1 $logfile \
 $encode_access_key $encode_secret_key $downloads_dir
 
+wait_for_jobs_to_finish "Download"
+
 du -h -d 2 .
 df -h
 
@@ -154,7 +156,7 @@ $encode_secret_key $downloads_dir
 
 df -h
 
-wait_for_jobs_to_finish "Download"
+wait_for_jobs_to_finish "rest_of_download"
 
 # Step 3. preprocess
 
