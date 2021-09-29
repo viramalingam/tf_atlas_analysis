@@ -29,6 +29,8 @@ task run_preprocess {
 		../create_params.sh ${experiment} ${tuning} ${learning_rate} ${counts_loss_weight} ${epochs} ${encode_access_key} ${encode_secret_key} ${gcp_bucket} ${pipeline_destination} ${metadata}
 		cp params_file.json /cromwell_root/params_file.json	#copy the file to the root folder for cromwell to copy
 
+		df -h
+
 		##preprocessing
 		echo "run ../run_preprocess.sh"
 		../run_preprocess.sh params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index}
@@ -38,7 +40,7 @@ task run_preprocess {
 	output {
 		File params_json = "params_file.json"
 	}
-	
+
 	runtime {
 		docker: 'vivekramalingam/tf-atlas'
 		memory: 12 + "GB"
@@ -72,7 +74,7 @@ workflow preprocess {
 			epochs = epochs,
 			encode_access_key = encode_access_key,
 			encode_secret_key = encode_secret_key,
-        		gcp_bucket = gcp_bucket,
+        	gcp_bucket = gcp_bucket,
 			pipeline_destination = pipeline_destination,
 			metadata = metadata,
 			reference_file = reference_file,
