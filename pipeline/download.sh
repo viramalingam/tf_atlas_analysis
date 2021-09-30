@@ -34,9 +34,6 @@ echo $( timestamp ): File save location... $dst_fname  | tee -a $logfile
 du -h -d 2 $downloads_dir
 du -h -d 2 .
 
-curl -sRL -u 3G5L4K3W:yqz7n22xndk5udyp https://www.encodeproject.org/files/ENCFF869MIO/@@download/ENCFF869MIO.bam -o temp.bam
-
-md5sum temp.bam
 
 echo $logfile
 
