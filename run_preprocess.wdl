@@ -45,7 +45,7 @@ task run_preprocess {
 	runtime {
 		docker: 'vivekramalingam/tf-atlas'
 		memory: 12 + "GB"
-		disks: "local-disk 1000 HDD, d-1b2e5749db4b0a6439c4895809508e1e 100 SSD"
+		disks: "local-disk 100 SSD"
 	}
 }
 

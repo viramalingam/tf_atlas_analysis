@@ -37,6 +37,8 @@ du -h -d 2 .
 
 echo $logfile
 
+lsblk
+
 readlink -f $logfile
 
 # check if the file already exists
