@@ -24,7 +24,7 @@ task run_modelling {
 
 		##modelling
 		echo "run ../run_modelling.sh"
-		../run_modelling.sh ${params_file} ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index} ${chrom_sizes} ${experiment}
+		../run_modelling.sh ${params_file} ${encode_access_key} ${encode_secret_key} ${reference_file} ${reference_file_index} ${chrom_sizes} ${experiment}
 		
 		cp *.json /cromwell_root/inputs.json
 		cp model /cromwell_root/
