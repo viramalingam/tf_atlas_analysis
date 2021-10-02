@@ -10,6 +10,8 @@ task run_modelling {
 		File chrom_sizes
 		File chroms_txt
 		File params_file
+		Array [File] bigwigs
+		File peaks
   	}	
 	command {
 		#create data directories and download scripts
@@ -23,8 +25,9 @@ task run_modelling {
 
 
 		##modelling
+
 		echo "run ../run_modelling.sh"
-		../run_modelling.sh ${params_file} ${encode_access_key} ${encode_secret_key} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${experiment}
+		../run_modelling.sh ${params_file} ${encode_access_key} ${encode_secret_key} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${bigwigs} ${peaks}
 		
 		cp *.json /cromwell_root/inputs.json
 		cp model /cromwell_root/
@@ -36,8 +39,8 @@ task run_modelling {
 	output {
 		File inputs_json = "inputs.json"
 		Array[File] model = glob("model/*")
-		Array[File] predictions = glob("model/*")
-		Array[File] embeddings = glob("model/*")
+		Array[File] predictions = glob("predictions/*")
+		Array[File] embeddings = glob("embeddings/*")
 
 	
 	}
@@ -64,6 +67,8 @@ workflow modelling {
 		File chrom_sizes
 		File chroms_txt
 		File params_file
+		Array [File] bigwigs
+		File peaks
 	}
 
 	call run_modelling {
@@ -75,8 +80,9 @@ workflow modelling {
 			reference_file_index = reference_file_index,	
 			chrom_sizes = chrom_sizes,
 			chroms_txt = chroms_txt,
-			params_file = params_file
-
+			params_file = params_file,
+			bigwigs = bigwigs,
+			peaks = peaks
  	}
 	output {
 		File inputs_json = run_modelling.inputs_json
