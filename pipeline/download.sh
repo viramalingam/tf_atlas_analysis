@@ -31,15 +31,6 @@ fname=${download_url##*/}
 dst_fname=$downloads_dir/$fname  
 echo $( timestamp ): File save location... $dst_fname  | tee -a $logfile
 
-du -h -d 2 $downloads_dir
-du -h -d 2 .
-
-
-echo $logfile
-
-lsblk
-
-readlink -f $logfile
 
 # check if the file already exists
 if [ -f $dst_fname ]

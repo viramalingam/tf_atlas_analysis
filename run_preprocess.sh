@@ -137,9 +137,6 @@ $encode_access_key $encode_secret_key $downloads_dir
 
 wait_for_jobs_to_finish "Download"
 
-du -h -d 2 .
-df -h
-
 if [ "$has_control" = "True" ]
 then
     # 2.3 download control unfiltered alignmentsbams
@@ -156,7 +153,6 @@ fi
 download_file $peaks "bed.gz" $peaks_md5sum 1 $logfile $encode_access_key \
 $encode_secret_key $downloads_dir
 
-df -h
 
 wait_for_jobs_to_finish "rest_of_download"
 

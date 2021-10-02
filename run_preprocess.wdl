@@ -34,16 +34,15 @@ task run_preprocess {
 		##preprocessing
 		echo "run ../run_preprocess.sh"
 		../run_preprocess.sh params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index} ${chrom_sizes}
-		cp downloads/*.bed /cromwell_root/peaks.bed
-		zip -r bigWigs.zip bigwigs
-		cp -r bigWigs.zip /cromwell_root/
+		cp downloads/*.bed.gz /cromwell_root/peaks.bed
+		cp -r bigWigs/ /cromwell_root/
 		
 	}
 	
 	output {
 		File params_json = "params_file.json"
 		File peaks_bed = "peaks.bed"
-		File bigwigs = "bigWigs.zip"
+		Array[File] output_bw = glob("bigWigs/*.bigWig")
 	
 	}
 
