@@ -135,7 +135,6 @@ $encode_secret_key $downloads_dir
 download_file "$alignments" "bam" "$alignments_md5sums" 1 $logfile \
 $encode_access_key $encode_secret_key $downloads_dir
 
-wait_for_jobs_to_finish "Download"
 
 if [ "$has_control" = "True" ]
 then
@@ -154,7 +153,7 @@ download_file $peaks "bed.gz" $peaks_md5sum 1 $logfile $encode_access_key \
 $encode_secret_key $downloads_dir
 
 
-wait_for_jobs_to_finish "rest_of_download"
+wait_for_jobs_to_finish "Download"
 
 # Step 3. preprocess
 
