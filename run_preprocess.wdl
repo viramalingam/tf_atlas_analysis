@@ -15,6 +15,7 @@ task run_preprocess {
 		File metadata
 		File reference_file
 		File reference_file_index
+		File chrom_sizes
   	}	
 	command {
 		#create data directories and download scripts
@@ -29,17 +30,21 @@ task run_preprocess {
 		../create_params.sh ${experiment} ${tuning} ${learning_rate} ${counts_loss_weight} ${epochs} ${encode_access_key} ${encode_secret_key} ${gcp_bucket} ${pipeline_destination} ${metadata}
 		cp params_file.json /cromwell_root/params_file.json	#copy the file to the root folder for cromwell to copy
 
-		df -h
-		du -h -d 2 .
 
 		##preprocessing
 		echo "run ../run_preprocess.sh"
-		../run_preprocess.sh params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index}
+		../run_preprocess.sh params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index} ${chrom_sizes}
+		cp downloads/*.bed /cromwell_root/peaks.bed
+		zip -r bigWigs.zip bigwigs
+		cp -r bigWigs.zip /cromwell_root/
 		
 	}
 	
 	output {
 		File params_json = "params_file.json"
+		File peaks_bed = "peaks.bed"
+		File bigwigs = "bigWigs.zip"
+	
 	}
 
 	runtime {
@@ -65,6 +70,7 @@ workflow preprocess {
 		File metadata
 		File reference_file
 		File reference_file_index
+		File chrom_sizes
 	}
 
 	call run_preprocess {
@@ -80,10 +86,14 @@ workflow preprocess {
 			pipeline_destination = pipeline_destination,
 			metadata = metadata,
 			reference_file = reference_file,
-			reference_file_index = reference_file_index	
+			reference_file_index = reference_file_index,	
+			chrom_sizes = chrom_sizes
  	}
 	output {
 		File params_json = run_preprocess.params_json
+		File peaks_bed = run_preprocess.peaks_bed
+		File bigwigs = run_preprocess.bigwigs
+		
 
 	}
 }

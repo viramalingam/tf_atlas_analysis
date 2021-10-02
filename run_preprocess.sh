@@ -78,6 +78,7 @@ pipeline_destination=$4
 
 reference_file=${5}
 reference_file_index=${6}
+chrom_sizes=${7}
 
 # create log file
 logfile=$experiment.log
@@ -121,6 +122,7 @@ tee -a $logfile
 
 cp $reference_file $reference_dir/
 cp $reference_file_index $reference_dir/
+cp $chrom_sizes $reference_dir/chrom.sizes
 
 # Step 2. download bam files and peaks file
 
