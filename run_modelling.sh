@@ -53,6 +53,8 @@ reference_file=${4}
 reference_file_index=${5}
 chrom_sizes=${6}
 chroms_txt=${7}
+bigwigs=${8}
+peaks=${9}
 
 # create log file
 logfile=$experiment.log
@@ -117,6 +119,11 @@ cp $reference_file $reference_dir/genome.fa
 cp $reference_file_index $reference_dir/genome.fa.fai
 cp $chrom_sizes $reference_dir/chrom.sizes
 cp $chroms_txt $reference_dir/chroms.txt
+
+# Step 1: Copy the bigwig and peak files
+
+echo ${bigwigs}
+ls ${bigwigs}
 
 
 
