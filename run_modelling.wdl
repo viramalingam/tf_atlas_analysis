@@ -25,6 +25,8 @@ task run_modelling {
 		chmod -R 777 tf_atlas_analysis
 		cd tf_atlas_analysis/pipeline
 
+		nvidia-smi
+
 
 		##modelling
 		echo "run ../run_modelling.sh"
