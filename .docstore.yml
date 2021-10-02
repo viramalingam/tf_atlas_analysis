@@ -4,3 +4,7 @@ workflows:
      subclass: WDL
      publish: True
      primaryDescriptorPath: /run_preprocess.wdl
+   - name: modelling
+     subclass: WDL
+     publish: True
+     primaryDescriptorPath: /run_modelling.wdl
