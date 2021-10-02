@@ -14,11 +14,11 @@
 
 # path to json file with pipeline params
 pipeline_json=$1
-experiment=`jq .experiment $pipeline_json | sed 's/"//g'` 
-
 
 # get params from the pipleine json
 experiment=`jq .experiment $pipeline_json | sed 's/"//g'` 
+
+echo "experiment in pipeline_json is "$experiment
 
 peaks=`jq .peaks $pipeline_json | sed 's/"//g'`
 
@@ -49,12 +49,10 @@ encode_access_key=$2
 
 encode_secret_key=$3
 
-pipeline_destination=$4
-
-reference_file=${5}
-reference_file_index=${6}
-chrom_sizes=${7}
-chroms_txt=${8}
+reference_file=${4}
+reference_file_index=${5}
+chrom_sizes=${6}
+chroms_txt=${7}
 
 # create log file
 logfile=$experiment.log
@@ -114,6 +112,7 @@ tee -a $logfile
 cp $reference_file $reference_dir/
 cp $reference_file_index $reference_dir/
 cp $chrom_sizes $reference_dir/chrom.sizes
+cp $chroms_txt $reference_dir/chroms.txt
 
 
 
