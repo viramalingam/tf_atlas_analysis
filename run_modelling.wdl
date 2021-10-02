@@ -44,7 +44,7 @@ task run_modelling {
 
 	runtime {
 		docker: 'vivekramalingam/tf-atlas'
-		memory: 60 + "GB"
+		memory: 30 + "GB"
 		bootDiskSizeGb: 100
 		disks: "local-disk 1000 HDD"
 		gpuType: "nvidia-tesla-k80"
