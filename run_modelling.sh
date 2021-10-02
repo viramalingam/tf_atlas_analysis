@@ -113,8 +113,8 @@ echo $( timestamp ): "cp" $chroms_txt $reference_dir/ |\
 tee -a $logfile 
 
 
-cp $reference_file $reference_dir/
-cp $reference_file_index $reference_dir/
+cp $reference_file $reference_dir/genome.fa
+cp $reference_file_index $reference_dir/genome.fa.fai
 cp $chrom_sizes $reference_dir/chrom.sizes
 cp $chroms_txt $reference_dir/chroms.txt
 
