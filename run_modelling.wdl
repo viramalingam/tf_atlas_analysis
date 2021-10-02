@@ -73,8 +73,8 @@ workflow modelling {
 			encode_secret_key = encode_secret_key,
 			reference_file = reference_file,
 			reference_file_index = reference_file_index,	
-			chrom_sizes = chrom_sizes
-			chroms_txt = chroms_txt
+			chrom_sizes = chrom_sizes,
+			chroms_txt = chroms_txt,
 			params_file = params_file
 
  	}
