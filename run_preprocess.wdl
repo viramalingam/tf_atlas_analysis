@@ -91,7 +91,7 @@ workflow preprocess {
 	output {
 		File params_json = run_preprocess.params_json
 		File peaks_bed = run_preprocess.peaks_bed
-		Array[File] bigwigs = run_preprocess.output_bw
+		Array[File] output_bw = run_preprocess.output_bw
 		
 
 	}
