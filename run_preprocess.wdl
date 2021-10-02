@@ -35,7 +35,7 @@ task run_preprocess {
 		echo "run ../run_preprocess.sh"
 		../run_preprocess.sh params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index} ${chrom_sizes}
 		cp downloads/*.bed.gz /cromwell_root/peaks.bed
-		cp -r bigWigs/ /cromwell_root/
+		cp -r bigWigs /cromwell_root/
 		
 	}
 	
@@ -91,7 +91,7 @@ workflow preprocess {
 	output {
 		File params_json = run_preprocess.params_json
 		File peaks_bed = run_preprocess.peaks_bed
-		File bigwigs = run_preprocess.bigwigs
+		File bigwigs = run_preprocess.output_bw
 		
 
 	}
