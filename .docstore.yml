@@ -1,9 +1,5 @@
 version: 1.2
 workflows:
-   - name: preprocess
-     subclass: WDL
-     publish: True
-     primaryDescriptorPath: /run_preprocess.wdl
    - name: modelling
      subclass: WDL
      publish: True
