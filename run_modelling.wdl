@@ -3,19 +3,13 @@ version 1.0
 task run_modelling {
 	input {
 		String experiment
-		String tuning
-		Float learning_rate
-		Int counts_loss_weight
-		Int epochs
 		String encode_access_key
 		String encode_secret_key
-		#gbsc-gcp-lab-kundaje-tf-atlas
-		String gcp_bucket
-		String pipeline_destination
-		File metadata
 		File reference_file
 		File reference_file_index
 		File chrom_sizes
+		File chroms_txt
+		File params_file
   	}	
 	command {
 		#create data directories and download scripts
@@ -30,7 +24,7 @@ task run_modelling {
 
 		##modelling
 		echo "run ../run_modelling.sh"
-		../run_modelling.sh params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index} ${chrom_sizes}
+		../run_modelling.sh ${params_file} ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index} ${chrom_sizes} ${experiment}
 		
 		cp *.json /cromwell_root/inputs.json
 		cp model /cromwell_root/
@@ -54,7 +48,7 @@ task run_modelling {
 		bootDiskSizeGb: 100
 		disks: "local-disk 1000 HDD"
 		gpuType: "nvidia-tesla-k80"
-		gpuCount: 2
+		gpuCount: 1
 		nvidiaDriverVersion: "418.87.00" 
 	}
 }
@@ -62,37 +56,26 @@ task run_modelling {
 workflow modelling {
 	input {
 		String experiment
-		String tuning
-		Float learning_rate
-		Int counts_loss_weight
-		Int epochs
 		String encode_access_key
 		String encode_secret_key
 		#gbsc-gcp-lab-kundaje-tf-atlas
-		String gcp_bucket
-		String pipeline_destination
-		File metadata
 		File reference_file
 		File reference_file_index
 		File chrom_sizes
 		File chroms_txt
+		File params_file
 	}
 
 	call run_modelling {
 		input:
 			experiment = experiment,
-			tuning = tuning,
-			learning_rate = learning_rate,
-			counts_loss_weight = counts_loss_weight,
-			epochs = epochs,
 			encode_access_key = encode_access_key,
 			encode_secret_key = encode_secret_key,
-        	gcp_bucket = gcp_bucket,
-			pipeline_destination = pipeline_destination,
-			metadata = metadata,
 			reference_file = reference_file,
 			reference_file_index = reference_file_index,	
 			chrom_sizes = chrom_sizes
+			chroms_txt = chroms_txt
+			params_file = params_file
 
  	}
 	output {

@@ -18,6 +18,9 @@ pipeline_json=$1
 # get params from the pipleine json
 experiment=`jq .experiment $pipeline_json | sed 's/"//g'` 
 
+echo "experiment from params_file is "$experiment
+
+
 assembly=`jq .assembly $pipeline_json | sed 's/"//g'`
 
 unfiltered_alignments=`jq .unfiltered_alignments $pipeline_json | sed 's/"//g'`
@@ -79,6 +82,7 @@ pipeline_destination=$4
 reference_file=${5}
 reference_file_index=${6}
 chrom_sizes=${7}
+chroms_txt=${8}
 
 # create log file
 logfile=$experiment.log
