@@ -14,6 +14,8 @@
 
 # path to json file with pipeline params
 pipeline_json=$1
+experiment=`jq .experiment $pipeline_json | sed 's/"//g'` 
+
 
 # get params from the pipleine json
 experiment=`jq .experiment $pipeline_json | sed 's/"//g'` 
@@ -52,6 +54,7 @@ pipeline_destination=$4
 reference_file=${5}
 reference_file_index=${6}
 chrom_sizes=${7}
+chroms_txt=${8}
 
 # create log file
 logfile=$experiment.log
