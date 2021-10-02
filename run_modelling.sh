@@ -130,34 +130,34 @@ $downloads_dir .
     
 # Step 4. Run the first M (Modeling, Metrics, Modisco)
 
-if [ "$tuning" = "True" ]
-then
-    # Step 4.1.0 Tuning
+# if [ "$tuning" = "True" ]
+# then
+#     # Step 4.1.0 Tuning
     
-    # We will train models with different hyperparameters and 
-    # pick the learning rate and counts_loss_weight based on the model
-    # with the lowest loss. This can be any script it just to output
-    # tuning_output.json with learning_rate and counts_loss_weight values.
+#     # We will train models with different hyperparameters and 
+#     # pick the learning rate and counts_loss_weight based on the model
+#     # with the lowest loss. This can be any script it just to output
+#     # tuning_output.json with learning_rate and counts_loss_weight values.
 
-    echo $( timestamp ): "./tuning.sh" $experiment $model_arch_name \
-    $sequence_generator_name $splits_json_path $peaks $learning_rate \
-    $counts_loss_weight $epochs $reference_dir $downloads_dir $model_dir \
-    $predictions_dir $embeddings_dir $logfile $tuning_dir | tee -a $logfile
+#     echo $( timestamp ): "./tuning.sh" $experiment $model_arch_name \
+#     $sequence_generator_name $splits_json_path $peaks $learning_rate \
+#     $counts_loss_weight $epochs $reference_dir $downloads_dir $model_dir \
+#     $predictions_dir $embeddings_dir $logfile $tuning_dir | tee -a $logfile
 
-    ./tuning.sh $experiment $model_arch_name $sequence_generator_name \
-    $splits_json_path $peaks $learning_rate $counts_loss_weight $epochs \
-    $reference_dir $downloads_dir $model_dir $predictions_dir $embeddings_dir \
-    $logfile $tuning_dir | tee -a $logfile
+#     ./tuning.sh $experiment $model_arch_name $sequence_generator_name \
+#     $splits_json_path $peaks $learning_rate $counts_loss_weight $epochs \
+#     $reference_dir $downloads_dir $model_dir $predictions_dir $embeddings_dir \
+#     $logfile $tuning_dir | tee -a $logfile
 
 
-    learning_rate=`jq .learning_rate tuning_output.json | sed 's/"//g'`
+#     learning_rate=`jq .learning_rate tuning_output.json | sed 's/"//g'`
 
-    counts_loss_weight=`jq .counts_loss_weight tuning_output.json | sed 's/"//g'`
+#     counts_loss_weight=`jq .counts_loss_weight tuning_output.json | sed 's/"//g'`
     
-    echo "learning_rate="$learning_rate
-    echo "counts_loss_weight="$counts_loss_weight
+#     echo "learning_rate="$learning_rate
+#     echo "counts_loss_weight="$counts_loss_weight
 
-fi
+# fi
 
 # Step 4.1.1 Modeling
 
