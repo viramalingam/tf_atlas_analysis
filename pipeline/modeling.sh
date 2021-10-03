@@ -26,7 +26,7 @@ fi
 # the train command
 echo $( timestamp ): "
 train \\
-    --input-data model_json_$experiment.json \\
+    --input-data $experiment.json \\
     --stranded \\
     --output-dir $model_dir \\
     --reference-genome $reference_dir/genome.fa \\
@@ -46,7 +46,7 @@ train \\
     --counts-loss-weight $counts_loss_weight" | tee -a $logfile
 
 train \
-    --input-data model_json_$experiment.json \
+    --input-data $experiment.json \
     --stranded \
     --output-dir $model_dir \
     --reference-genome $reference_dir/genome.fa \
