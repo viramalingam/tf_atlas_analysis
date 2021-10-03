@@ -176,11 +176,11 @@ $downloads_dir .
 
 echo $( timestamp ): "./modeling.sh" $experiment $model_arch_name \
 $sequence_generator_name $splits_json_path $peaks $learning_rate \
-$counts_loss_weight $epochs $reference_dir $downloads_dir $model_dir \
+$counts_loss_weight 2 $reference_dir $downloads_dir $model_dir \
 $predictions_dir $embeddings_dir $logfile | tee -a $logfile
 
 ./modeling.sh $experiment $model_arch_name $sequence_generator_name \
-$splits_json_path $peaks $learning_rate $counts_loss_weight $epochs \
+$splits_json_path $peaks $learning_rate $counts_loss_weight 2 \
 $reference_dir $downloads_dir $model_dir $predictions_dir $embeddings_dir \
 $logfile
 
