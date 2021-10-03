@@ -141,6 +141,8 @@ True $bigWigs_dir $downloads_dir . | tee -a $logfile
 python create_input_json.py $experiment $peaks True True $bigWigs_dir \
 $downloads_dir .
     
+cp ${experiment}.json model_input.json
+
 # Step 4. Run the first M (Modeling, Metrics, Modisco)
 
 # if [ "$tuning" = "True" ]
