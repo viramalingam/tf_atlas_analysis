@@ -103,7 +103,7 @@ embeddings \\
     --model $model_dir/${experiment}_split000.h5 \\
     --reference-genome $reference_dir/genome.fa \\
     --input-layer-shape 2114 4 \\
-    --peaks $downloads_dir/$peaks.bed.gz \\
+    --peaks $downloads_dir/peaks.bed.gz \\
     --numbered-embeddings-layers-prefix dil_conv \\
     --cropped-size 1000 \\
     --batch-size 256 \\

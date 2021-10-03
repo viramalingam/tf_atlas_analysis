@@ -30,14 +30,14 @@ do
         --input-profiles $input_file \\
         --output-names $task_id \\
         --output-directory $bounds_dir \\
-        --peaks $downloads_dir/$peaks.bed.gz \\
+        --peaks $downloads_dir/peaks.bed.gz \\
         --chroms $test_chroms" | tee -a $logfile
     
     bounds \
         --input-profiles $input_file \
         --output-names $task_id \
         --output-directory $bounds_dir \
-        --peaks $downloads_dir/$peaks.bed.gz \
+        --peaks $downloads_dir/peaks.bed.gz \
         --chroms $test_chroms
     
     echo $( timestamp ): "mkdir" $metrics_dir/$task_id | tee -a $logfile
@@ -48,7 +48,7 @@ do
     metrics \\
        -A $input_file \\
        -B $predictions_dir/${experiment}_split000_$task_id.bw \\
-       --peaks $downloads_dir/$peaks.bed.gz \\
+       --peaks $downloads_dir/peaks.bed.gz \\
        --chroms $test_chroms \\
        --output-dir $metrics_dir/$task_id \\
        --apply-softmax-to-profileB \\
@@ -59,7 +59,7 @@ do
     metrics \
        -A $input_file \
        -B $predictions_dir/${experiment}_split000_$task_id.bw \
-       --peaks $downloads_dir/$peaks.bed.gz \
+       --peaks $downloads_dir/peaks.bed.gz \
        --chroms $test_chroms  \
        --output-dir $metrics_dir/$task_id \
        --apply-softmax-to-profileB \

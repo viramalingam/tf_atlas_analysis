@@ -39,6 +39,8 @@ task run_modelling {
 		Array[File] model = glob("model/*")
 		Array[File] predictions = glob("predictions/*")
 		Array[File] embeddings = glob("embeddings/*")
+		Array[File] metics = glob("metics/*")
+		Array[File] bounds = glob("bounds/*")
 
 	
 	}
@@ -87,6 +89,8 @@ workflow modelling {
 		Array[File] model = run_modelling.model
 		Array[File] predictions = run_modelling.predictions
 		Array[File] embeddings = run_modelling.embeddings
+		Array[File] metics = run_modelling.metics
+		Array[File] bounds = run_modelling.bounds
 
 	}
 }
