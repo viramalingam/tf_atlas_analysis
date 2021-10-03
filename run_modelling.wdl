@@ -31,8 +31,7 @@ task run_modelling {
 		cp -r model /cromwell_root/
 		cp -r predictions /cromwell_root/
 		cp -r embeddings /cromwell_root/
-		cp -r metrics /cromwell_root/
-		cp -r bounds /cromwell_root/
+		
 		
 	}
 	
@@ -41,8 +40,7 @@ task run_modelling {
 		Array[File] model = glob("model/*")
 		Array[File] predictions = glob("predictions/*")
 		Array[File] embeddings = glob("embeddings/*")
-		Array[File] metrics = glob("metrics/*")
-		Array[File] bounds = glob("bounds/*")
+	
 
 	
 	}
@@ -91,8 +89,6 @@ workflow modelling {
 		Array[File] model = run_modelling.model
 		Array[File] predictions = run_modelling.predictions
 		Array[File] embeddings = run_modelling.embeddings
-		Array[File] metrics = run_modelling.metrics
-		Array[File] bounds = run_modelling.bounds
-
+		
 	}
 }
