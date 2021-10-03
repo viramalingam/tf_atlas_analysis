@@ -125,6 +125,8 @@ cp $chroms_txt $reference_dir/chroms.txt
 echo ${bigwigs}
 ls ${bigwigs}
 
+echo ${peaks}
+ls ${peaks}
 
 
 # Step pre_4: Create the input json for the experiment that will
