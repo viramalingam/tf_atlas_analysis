@@ -50,7 +50,7 @@ for i in range(len(experiments)):
             task_dict["task_id"] = i
             task_dict["signal"] = '{}/{}_{}.bigWig'.format(
                 bigWigs_dir, experiment, strand)
-            task_dict["peaks"] = '{}/{}.bed.gz'.format(peaks_dir, peaks[i])
+            task_dict["peaks"] = '{}/{}.bed.gz'.format(peaks_dir, 'peaks')
 
             if has_control:
                 task_dict["control"] = '{}/{}_control_{}.bigWig'.format(

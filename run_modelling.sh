@@ -105,13 +105,13 @@ mkdir $embeddings_dir
 
 # Step 1: Copy the reference files
 
-echo $( timestamp ): "cp" $reference_file $reference_dir/ | \
+echo $( timestamp ): "cp" $reference_file ${reference_dir}/genome.fa | \
 tee -a $logfile 
-echo $( timestamp ): "cp" $reference_file_index $reference_dir/ |\
+echo $( timestamp ): "cp" $reference_file_index ${reference_dir}/genome.fa.fai |\
 tee -a $logfile 
-echo $( timestamp ): "cp" $chroms_txt $reference_dir/ |\
+echo $( timestamp ): "cp" $chroms_txt ${reference_dir}/chrom.sizes |\
 tee -a $logfile 
-echo $( timestamp ): "cp" $chroms_txt $reference_dir/ |\
+echo $( timestamp ): "cp" $chroms_txt ${reference_dir}/chroms.txt |\
 tee -a $logfile 
 
 
@@ -122,11 +122,15 @@ cp $chroms_txt $reference_dir/chroms.txt
 
 # Step 1: Copy the bigwig and peak files
 
-echo ${bigwigs}
-ls ${bigwigs}
+echo $bigwigs | sed 's/,/ /g' | xargs cp -t $bigWigs_dir/
 
-echo ${peaks}
-ls ${peaks}
+echo $( timestamp ): "cp" $bigwigs ${bigWigs_dir}/ |\
+tee -a $logfile 
+
+echo $( timestamp ): "cp" $peaks ${downloads_dir}/peaks.bed.gz |\
+tee -a $logfile 
+
+cp $peaks ${downloads_dir}/peaks.bed.gz
 
 
 # Step pre_4: Create the input json for the experiment that will
