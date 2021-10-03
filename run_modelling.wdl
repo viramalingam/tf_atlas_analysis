@@ -30,9 +30,9 @@ task run_modelling {
 		../run_modelling.sh ${params_file} ${encode_access_key} ${encode_secret_key} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
 		
 		cp *.json /cromwell_root/inputs.json
-		cp model /cromwell_root/
-		cp predictions /cromwell_root/
-		cp embeddings /cromwell_root/
+		cp -r model /cromwell_root/
+		cp -r predictions /cromwell_root/
+		cp -r embeddings /cromwell_root/
 		
 	}
 	
