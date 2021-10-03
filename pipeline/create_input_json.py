@@ -73,7 +73,7 @@ for i in range(len(experiments)):
         input_dict[task_id] = task_dict
 
 output_basename = '_'.join(experiments)
-output_filenane = '{}/{}.json'.format(output_dir, output_basename)
+output_filenane = 'model_input_{}/{}.json'.format(output_dir, output_basename)
 
 # write dictionary to json
 with open(output_filenane, 'w') as outf:
