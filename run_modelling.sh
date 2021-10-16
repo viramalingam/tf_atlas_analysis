@@ -186,12 +186,12 @@ $splits_json_path $peaks $learning_rate $counts_loss_weight $epochs \
 $reference_dir $downloads_dir $model_dir $predictions_dir $embeddings_dir \
 $logfile
 
-# # Step 4.2 Metrics
+# Step 4.2 Metrics
 
-# echo $( timestamp ): "./metrics.sh" $experiment $downloads_dir $reference_dir \
-# $predictions_dir $peaks $test_chroms $bounds_dir $metrics_dir | tee -a $logfile
+echo $( timestamp ): "./metrics.sh" $experiment $downloads_dir $reference_dir \
+$predictions_dir $peaks $test_chroms $bounds_dir $metrics_dir | tee -a $logfile
 
-# ./metrics.sh $experiment $downloads_dir $reference_dir $predictions_dir \
-# $peaks $test_chroms $bounds_dir $metrics_dir $logfile
+./metrics.sh $experiment $downloads_dir $reference_dir $predictions_dir \
+$peaks $test_chroms $bounds_dir $metrics_dir $logfile
 
 
