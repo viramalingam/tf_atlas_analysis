@@ -33,7 +33,7 @@ train \\
     --chrom-sizes $reference_dir/chrom.sizes \\
     --chroms $(paste -s -d ' ' $reference_dir/chroms.txt)  \\
     --shuffle \\
-    --epochs ${epochs}5 \\
+    --epochs $epochs \\
     --splits $splits_file_path \\
     --model-arch-name $arch_name \\
     --sequence-generator-name $seqgen_name \\
@@ -53,7 +53,7 @@ train \
     --chrom-sizes $reference_dir/chrom.sizes \
     --chroms $(paste -s -d ' ' $reference_dir/chroms.txt)  \
     --shuffle \
-    --epochs 5 \
+    --epochs $epochs \
     --splits $splits_file_path \
     --model-arch-name $arch_name \
     --sequence-generator-name $seqgen_name \
