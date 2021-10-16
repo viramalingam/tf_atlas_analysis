@@ -67,3 +67,5 @@ do
        --chrom-sizes $reference_dir/chrom.sizes \
        --bounds-csv $bounds_dir/$task_id.bds
 done
+
+tail -n 1 ${metrics_dir}/task0_plus/metrics.log | awk '{print $NF}' > spearman.txt
