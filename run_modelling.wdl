@@ -33,7 +33,7 @@ task run_modelling {
 		cp -r embeddings /cromwell_root/
 		cp -r metrics /cromwell_root/
 		cp -r bounds /cromwell_root/
-		cp - r spearman.txt /cromwell_root/spearman.txt
+		cp -r spearman.txt /cromwell_root/spearman.txt
 		
 	}
 	
