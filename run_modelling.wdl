@@ -33,8 +33,7 @@ task run_modelling {
 		cp -r embeddings /cromwell_root/
 		cp -r metrics /cromwell_root/
 		cp -r bounds /cromwell_root/
-
-		tail -n 1 metrics/task0_plus/metrics.log | awk '{print $NF}' > /cromwell_root/spearman.txt
+		cp - r spearman.txt /cromwell_root/spearman.txt
 		
 	}
 	
