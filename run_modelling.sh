@@ -102,6 +102,15 @@ embeddings_dir=${dst_dir}embeddings
 echo $( timestamp ): "mkdir" $embeddings_dir | tee -a $logfile
 mkdir $embeddings_dir
 
+# directory to store min max bounds
+bounds_dir=${dst_dir}bounds
+echo $( timestamp ): "mkdir" $bounds_dir | tee -a $logfile
+mkdir $bounds_dir
+   
+# directory to store metrics output
+metrics_dir=${dst_dir}metrics
+echo $( timestamp ): "mkdir" $metrics_dir | tee -a $logfile
+mkdir $metrics_dir
 
 # Step 1: Copy the reference files
 
