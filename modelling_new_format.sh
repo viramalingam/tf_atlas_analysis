@@ -12,12 +12,14 @@ experiment=$1
 params_file=$2
 inputs_json=$3
 training_inputs_json=$4
-reference_file=$5
-reference_file_index=$6
-chrom_sizes=$7
-chroms_txt=$8
-bigwigs=$9
-peaks=${10}
+bpnet_params_json=$5
+splits_json=$6
+reference_file=$7
+reference_file_index=$8
+chrom_sizes=$9
+chroms_txt=${10}
+bigwigs=${11}
+peaks=${12}
 
 
 mkdir /project
@@ -77,6 +79,9 @@ tee -a $logfile
 
 cp $peaks ${data_dir}/${experiment}_combined.bed.gz
 
+echo $( timestamp ): "gunzip" ${data_dir}/${experiment}_combined.bed.gz |\
+tee -a $logfile 
+
 gunzip ${data_dir}/${experiment}_combined.bed.gz
 
 
@@ -97,23 +102,28 @@ sed -i -e "s/<>/$1/g" $project_dir/training_input.json | tee -a $logfile
 
 # Finally, the input json for the rest of the commands (without
 # gc-matched negatives)
-echo $( timestamp ): "cp" input_json \
-$project_dir/input.json | tee -a $logfile 
-cp $input_json $project_dir/input.json
+echo $( timestamp ): "cp" $inputs_json \
+$project_dir/inputs.json | tee -a $logfile 
+cp $inputs_json $project_dir/inputs.json
+
+
 
 # modify the input json for 
-echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/input.json 
-sed -i -e "s/<>/$1/g" $project_dir/input.json | tee -a $logfile 
+echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/inputs.json 
+sed -i -e "s/<>/$1/g" $project_dir/inputs.json | tee -a $logfile 
 
 # cp bpnet params json template
-echo $( timestamp ): "cp" bpnet_params_json \
-$project_dir/bpnet_params.json | tee -a $logfile 
-gsutil cp gs://$2/bpnet_params/bpnet_params.json $project_dir/
+echo $( timestamp ): "cp" $bpnet_params_json \
+$project_dir/bpnet_params.json| tee -a $logfile 
+cp $bpnet_params_json $project_dir/bpnet_params.json
+
+
 
 # cp splits json template
-echo $( timestamp ): "cp" splits_json \
+echo $( timestamp ): "cp" $splits_json \
 $project_dir/splits.json | tee -a $logfile 
 cp $splits_json $project_dir/splits.json
+
 
 
 # compute the counts loss weight to be used for this experiment
