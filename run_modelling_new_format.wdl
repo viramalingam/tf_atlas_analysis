@@ -90,7 +90,7 @@ workflow modelling {
 	output {
 		File bpnet_params_updated_json = run_modelling.bpnet_params_updated_json
 		Array[File] model = run_modelling.model
-		Array[File] predictions_and_metrics = run_modelling.predictions
+		Array[File] predictions_and_metrics = run_modelling.predictions_and_metrics
 		#Float spearman = run_modelling.spearman
 	}
 }
