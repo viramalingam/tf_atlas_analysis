@@ -20,13 +20,13 @@ task run_modelling {
 		cd /my_scripts
 		git clone https://github.com/viramalingam/tf_atlas_analysis.git
 		chmod -R 777 tf_atlas_analysis
-		cd tf_atlas_analysis/kubernetes/modelling/
+		cd tf_atlas_analysis/kubernetes/modeling/
 
 
 		##modelling
 
-		echo "run /my_scripts/tf_atlas_analysis/kubernetes/modelling/modelling_new_format.sh"
-		/my_scripts/tf_atlas_analysis/kubernetes/modelling/modelling_new_format.sh ${experiment} ${params_file} ${inputs_json} ${training_inputs_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
+		echo "run /my_scripts/tf_atlas_analysis/modelling_new_format.sh"
+		/my_scripts/tf_atlas_analysis/modelling_new_format.sh ${experiment} ${params_file} ${inputs_json} ${training_inputs_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
 
 		echo "copying all files to cromwell_root folder"
 		
