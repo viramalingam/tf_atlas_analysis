@@ -28,7 +28,7 @@ task run_modelling {
 
 		ls -al /my_scripts/tf_atlas_analysis/
 
-		echo "run /my_scripts/tf_atlas_analysis/modelling_new_format.sh"
+		echo "run /my_scripts/tf_atlas_analysis/modelling_new_format.sh" ${experiment} ${params_file} ${inputs_json} ${training_inputs_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
 		/my_scripts/tf_atlas_analysis/modelling_new_format.sh ${experiment} ${params_file} ${inputs_json} ${training_inputs_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
 
 		echo "copying all files to cromwell_root folder"

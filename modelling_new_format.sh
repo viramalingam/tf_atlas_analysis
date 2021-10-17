@@ -10,8 +10,8 @@ function timestamp {
 
 experiment=$1
 params_file=$2
-inputs_json=$3
-training_inputs_json=$4
+input_json=$3
+training_input_json=$4
 bpnet_params_json=$5
 splits_json=$6
 reference_file=$7
@@ -92,9 +92,9 @@ gunzip ${data_dir}/${experiment}_combined.bed.gz
 # First the input json for the train command (with loci from 
 # the combined bed file, peaks + gc-matched negatives)
 
-echo $( timestamp ): "cp" $training_inputs_json \
+echo $( timestamp ): "cp" $training_input_json \
 $project_dir/training_input.json | tee -a $logfile 
-cp $training_inputs_json $project_dir/training_input.json
+cp $training_input_json $project_dir/training_input.json
 
 # modify the input json 
 echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/training_input.json 
@@ -102,15 +102,15 @@ sed -i -e "s/<>/$1/g" $project_dir/training_input.json | tee -a $logfile
 
 # Finally, the input json for the rest of the commands (without
 # gc-matched negatives)
-echo $( timestamp ): "cp" $inputs_json \
-$project_dir/inputs.json | tee -a $logfile 
-cp $inputs_json $project_dir/inputs.json
+echo $( timestamp ): "cp" $input_json \
+$project_dir/input.json | tee -a $logfile 
+cp $input_json $project_dir/input.json
 
 
 
 # modify the input json for 
-echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/inputs.json 
-sed -i -e "s/<>/$1/g" $project_dir/inputs.json | tee -a $logfile 
+echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/input.json 
+sed -i -e "s/<>/$1/g" $project_dir/input.json | tee -a $logfile 
 
 # cp bpnet params json template
 echo $( timestamp ): "cp" $bpnet_params_json \
