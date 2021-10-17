@@ -38,7 +38,7 @@ task run_modelling {
 	}
 	
 	output {
-		File bpnet_params_json = "bpnet_params.json"
+		File bpnet_params_updated_json = "bpnet_params.json"
 		Array[File] model = glob("model/*")
 		Array[File] predictions_and_metrics = glob("predictions_and_metrics/*")
 		#Float spearman = read_float("spearman.txt")
@@ -88,7 +88,7 @@ workflow modelling {
 			peaks = peaks
  	}
 	output {
-		File bpnet_params_json = run_modelling.bpnet_params_json
+		File bpnet_params_updated_json = run_modelling.bpnet_params_updated_json
 		Array[File] model = run_modelling.model
 		Array[File] predictions_and_metrics = run_modelling.predictions
 		#Float spearman = run_modelling.spearman
