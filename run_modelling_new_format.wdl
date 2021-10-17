@@ -4,8 +4,8 @@ task run_modelling {
 	input {
 		String experiment
 		File params_file
-		File inputs_json
-		File training_inputs_json
+		File input_json
+		File training_input_json
 		File bpnet_params_json
 		File splits_json
 		File reference_file
@@ -28,8 +28,8 @@ task run_modelling {
 
 		ls -al /my_scripts/tf_atlas_analysis/
 
-		echo "run /my_scripts/tf_atlas_analysis/modelling_new_format.sh" ${experiment} ${params_file} ${inputs_json} ${training_inputs_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
-		/my_scripts/tf_atlas_analysis/modelling_new_format.sh ${experiment} ${params_file} ${inputs_json} ${training_inputs_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
+		echo "run /my_scripts/tf_atlas_analysis/modelling_new_format.sh" ${experiment} ${params_file} ${input_json} ${training_input_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
+		/my_scripts/tf_atlas_analysis/modelling_new_format.sh ${experiment} ${params_file} ${input_json} ${training_input_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
 
 		echo "copying all files to cromwell_root folder"
 		
@@ -65,8 +65,8 @@ workflow modelling {
 	input {
 		String experiment
 		File params_file
-		File inputs_json
-		File training_inputs_json
+		File input_json
+		File training_input_json
 		File bpnet_params_json
 		File splits_json
 		File reference_file
@@ -81,8 +81,8 @@ workflow modelling {
 		input:
 			experiment = experiment,
 			params_file = params_file,
-			inputs_json = inputs_json,
-			training_inputs_json = training_inputs_json,
+			input_json = input_json,
+			training_input_json = training_input_json,
 			bpnet_params_json = bpnet_params_json,
 			splits_json = splits_json,
 			reference_file = reference_file,

@@ -21,6 +21,19 @@ chroms_txt=${10}
 bigwigs=${11}
 peaks=${12}
 
+echo experiment
+echo params_file
+echo input_json
+echo training_input_json
+echo bpnet_params_json
+echo splits_json
+echo reference_file
+echo reference_file_index
+echo chrom_sizes
+echo chroms_txt
+echo bigwigs
+echo peaks
+
 
 mkdir /project
 project_dir=/project
