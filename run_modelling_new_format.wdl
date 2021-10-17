@@ -25,6 +25,8 @@ task run_modelling {
 
 		##modelling
 
+		ls -al /my_scripts/tf_atlas_analysis/
+
 		echo "run /my_scripts/tf_atlas_analysis/modelling_new_format.sh"
 		/my_scripts/tf_atlas_analysis/modelling_new_format.sh ${experiment} ${params_file} ${inputs_json} ${training_inputs_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
 
