@@ -13,12 +13,13 @@ params_file=$2
 inputs_json=$3
 training_inputs_json=$4
 bpnet_params_json=$5
-reference_file=$6
-reference_file_index=$7
-chrom_sizes=$8
-chroms_txt=$9
-bigwigs=${10}
-peaks=${11}
+splits_json=$6
+reference_file=$7
+reference_file_index=$8
+chrom_sizes=$9
+chroms_txt=${10}
+bigwigs=${11}
+peaks=${12}
 
 
 mkdir /project
@@ -101,15 +102,15 @@ sed -i -e "s/<>/$1/g" $project_dir/training_input.json | tee -a $logfile
 
 # Finally, the input json for the rest of the commands (without
 # gc-matched negatives)
-echo $( timestamp ): "cp" $input_json \
-$project_dir/input.json | tee -a $logfile 
-cp $input_json $project_dir/input.json
+echo $( timestamp ): "cp" $inputs_json \
+$project_dir/inputs.json | tee -a $logfile 
+cp $inputs_json $project_dir/inputs.json
 
 
 
 # modify the input json for 
-echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/input.json 
-sed -i -e "s/<>/$1/g" $project_dir/input.json | tee -a $logfile 
+echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/inputs.json 
+sed -i -e "s/<>/$1/g" $project_dir/inputs.json | tee -a $logfile 
 
 # cp bpnet params json template
 echo $( timestamp ): "cp" $bpnet_params_json \
