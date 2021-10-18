@@ -163,7 +163,7 @@ train \\
     --chrom-sizes $reference_dir/chrom.sizes \\
     --chroms $(paste -s -d ' ' $reference_dir/hg38_chroms.txt)  \\
     --shuffle \\
-    --epochs 5 \\
+    --epochs 100 \\
     --splits $project_dir/splits.json \\
     --model-arch-name BPNet \\
     --model-arch-params-json $project_dir/bpnet_params.json \\
@@ -181,7 +181,7 @@ train \
     --chrom-sizes $reference_dir/chrom.sizes \
     --chroms $(paste -s -d ' ' $reference_dir/hg38_chroms.txt)  \
     --shuffle \
-    --epochs 5 \
+    --epochs 100 \
     --splits $project_dir/splits.json \
     --model-arch-name BPNet \
     --model-arch-params-json $project_dir/bpnet_params.json \
