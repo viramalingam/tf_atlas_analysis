@@ -34,7 +34,7 @@ echo $bigwigs
 echo $peaks
 
 mkdir /project
-project_dir=/tfatlas/TF-Atlas/kubernetes/modeling/
+project_dir=/project
 
 # create the log file
 logfile=$project_dir/${1}_modeling.log
