@@ -35,8 +35,8 @@ task run_modelling {
 		cp /project/bpnet_params.json /cromwell_root/bpnet_params.json
 		cp -r /project/model /cromwell_root/
 		cp -r /project/predictions_and_metrics /cromwell_root/
-		cp -r /project/spearman.txt /cromwell_root/spearman.txt
-		cp -r /project/pearson.txt /cromwell_root/pearson.txt
+		cp -r /project/predictions_and_metrics/spearman.txt /cromwell_root/spearman.txt
+		cp -r /project/predictions_and_metrics/pearson.txt /cromwell_root/pearson.txt
 		
 	}
 	
