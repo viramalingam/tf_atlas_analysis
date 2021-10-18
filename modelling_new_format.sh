@@ -223,6 +223,6 @@ fastpredict \
 
 # create necessary files to copy the predictions results to cromwell folder
 
-tail -n 1 $predictions_dir/predict.log | awk '{print $NF}' > spearman.txt
-tail -n 2 $predictions_dir/predict.log | head -n 1 | awk '{print $NF}' > pearson.txt
+tail -n 1 $predictions_dir/predict.log | awk '{print $NF}' > $predictions_dir/spearman.txt
+tail -n 2 $predictions_dir/predict.log | head -n 1 | awk '{print $NF}' > $predictions_dir/pearson.txt
 
