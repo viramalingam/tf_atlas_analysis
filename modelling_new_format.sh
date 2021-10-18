@@ -9,21 +9,19 @@ function timestamp {
 }
 
 experiment=$1
-params_file=$2
-input_json=$3
-training_input_json=$4
-bpnet_params_json=$5
-splits_json=$6
-reference_file=$7
-reference_file_index=$8
-chrom_sizes=$9
-chroms_txt=${10}
-bigwigs=${11}
-peaks=${12}
+input_json=$2
+training_input_json=$3
+bpnet_params_json=$4
+splits_json=$5
+reference_file=$6
+reference_file_index=$7
+chrom_sizes=$8
+chroms_txt=${9}
+bigwigs=${10}
+peaks=${11}
 
 
 echo $experiment
-echo $params_file
 echo $input_json
 echo $training_input_json
 echo $bpnet_params_json
