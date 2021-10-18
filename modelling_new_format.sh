@@ -221,4 +221,8 @@ fastpredict \
     --batch-size 64 \
     --threads 2
 
-# create necessary files to copy the results to cromwell folder
+# create necessary files to copy the predictions results to cromwell folder
+
+tail -n 1 ${project_dir}/predict.log | awk '{print $NF}' > spearman.txt
+tail -n 2 ${project_dir}/predict.log | head -n 1 | awk '{print $NF}' > pearson.txt
+

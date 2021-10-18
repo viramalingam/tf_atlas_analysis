@@ -35,7 +35,8 @@ task run_modelling {
 		cp /project/bpnet_params.json /cromwell_root/bpnet_params.json
 		cp -r /project/model /cromwell_root/
 		cp -r /project/predictions_and_metrics /cromwell_root/
-		#cp -r spearman.txt /cromwell_root/spearman.txt
+		cp -r /project/spearman.txt /cromwell_root/spearman.txt
+		cp -r /project/pearson.txt /cromwell_root/pearson.txt
 		
 	}
 	
@@ -43,7 +44,8 @@ task run_modelling {
 		File bpnet_params_updated_json = "bpnet_params.json"
 		Array[File] model = glob("model/*")
 		Array[File] predictions_and_metrics = glob("predictions_and_metrics/*")
-		#Float spearman = read_float("spearman.txt")
+		Float spearman = read_float("spearman.txt")
+		Float pearson = read_float("pearson.txt")
 	
 	
 	}
@@ -92,6 +94,8 @@ workflow modelling {
 		File bpnet_params_updated_json = run_modelling.bpnet_params_updated_json
 		Array[File] model = run_modelling.model
 		Array[File] predictions_and_metrics = run_modelling.predictions_and_metrics
-		#Float spearman = run_modelling.spearman
+		Float spearman = run_modelling.spearman
+		Float pearson = run_modelling.pearson
+		
 	}
 }
