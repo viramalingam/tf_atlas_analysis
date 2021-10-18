@@ -21,18 +21,6 @@ chroms_txt=${10}
 bigwigs=${11}
 peaks=${12}
 
-echo $experiment
-echo $params_file
-echo $input_json
-echo $training_input_json
-echo $bpnet_params_json
-echo $splits_json
-echo $reference_file
-echo $reference_file_index
-echo $chrom_sizes
-echo $chroms_txt
-echo $bigwigs
-echo $peaks
 
 echo $experiment
 echo $params_file
@@ -74,35 +62,15 @@ predictions_dir=$project_dir/predictions_and_metrics
 echo $( timestamp ): "mkdir" $predictions_dir | tee -a $logfile
 mkdir $predictions_dir
 
-echo $experiment
-echo $params_file
-echo $input_json
-echo $training_input_json
-echo $bpnet_params_json
-echo $splits_json
-echo reference_file = $reference_file
-echo reference_file_index= $reference_file_index
-echo chrom_sizes = $chrom_sizes
-echo chroms_txt = $chroms_txt
-echo $bigwigs
-echo $peaks
-
-echo reference_file = $reference_file
 
 echo $( timestamp ): "cp" $reference_file ${reference_dir}/hg38.genome.fa | \
 tee -a $logfile 
 
-echo reference_file_index = $reference_file_index
-
 echo $( timestamp ): "cp" $reference_file_index ${reference_dir}/hg38.genome.fa.fai |\
 tee -a $logfile 
 
-echo chrom_sizes = $chrom_sizes
-
 echo $( timestamp ): "cp" $chrom_sizes ${reference_dir}/chrom.sizes |\
 tee -a $logfile 
-
-echo chroms_txt = $chroms_txt
 
 echo $( timestamp ): "cp" $chroms_txt ${reference_dir}/hg38_chroms.txt |\
 tee -a $logfile 
