@@ -13,7 +13,7 @@ task run_modelling {
 		File chroms_txt
 		Array [File] bigwigs
 		File peaks
-		Int learning_rate
+		Float learning_rate
   	}	
 	command {
 		#create data directories and download scripts
@@ -75,7 +75,7 @@ workflow modelling {
 		File chroms_txt
 		Array [File] bigwigs
 		File peaks
-		Int learning_rate
+		Float learning_rate
 	}
 
 	call run_modelling {
