@@ -19,6 +19,7 @@ chrom_sizes=$8
 chroms_txt=${9}
 bigwigs=${10}
 peaks=${11}
+learning_rate=${12}
 
 
 echo $experiment
@@ -182,7 +183,7 @@ train \\
     --input-seq-len 2114 \\
     --output-len 1000 \\
     --threads $threads \\
-    --learning-rate 0.004" | tee -a $logfile 
+    --learning-rate $learning_rate" | tee -a $logfile 
 
 train \
     --input-data $project_dir/training_input.json \
@@ -200,7 +201,7 @@ train \
     --input-seq-len 2114 \
     --output-len 1000 \
     --threads $threads \
-    --learning-rate 0.004
+    --learning-rate $learning_rate
 
 echo $( timestamp ): "
 fastpredict \\

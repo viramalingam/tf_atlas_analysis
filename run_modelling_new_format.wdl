@@ -13,6 +13,7 @@ task run_modelling {
 		File chroms_txt
 		Array [File] bigwigs
 		File peaks
+		Int learning_rate
   	}	
 	command {
 		#create data directories and download scripts
@@ -27,8 +28,8 @@ task run_modelling {
 
 		ls -al /my_scripts/tf_atlas_analysis/
 
-		echo "run /my_scripts/tf_atlas_analysis/modelling_new_format.sh" ${experiment} ${input_json} ${training_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
-		/my_scripts/tf_atlas_analysis/modelling_new_format.sh ${experiment} ${input_json} ${training_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
+		echo "run /my_scripts/tf_atlas_analysis/modelling_new_format.sh" ${experiment} ${input_json} ${training_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} ${learning_rate}
+		/my_scripts/tf_atlas_analysis/modelling_new_format.sh ${experiment} ${input_json} ${training_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} ${learning_rate}
 
 		echo "copying all files to cromwell_root folder"
 		
@@ -74,6 +75,7 @@ workflow modelling {
 		File chroms_txt
 		Array [File] bigwigs
 		File peaks
+		Int learning_rate
 	}
 
 	call run_modelling {
@@ -88,7 +90,8 @@ workflow modelling {
 			chrom_sizes = chrom_sizes,
 			chroms_txt = chroms_txt,
 			bigwigs = bigwigs,
-			peaks = peaks
+			peaks = peaks,
+			learning_rate = learning_rate
  	}
 	output {
 		File bpnet_params_updated_json = run_modelling.bpnet_params_updated_json
