@@ -32,9 +32,9 @@ task run_modelling {
 
 		echo "copying all files to cromwell_root folder"
 		
-		cp bpnet_params.json /cromwell_root/bpnet_params.json
-		cp -r model /cromwell_root/
-		cp -r predictions_and_metrics /cromwell_root/
+		cp /project/bpnet_params.json /cromwell_root/bpnet_params.json
+		cp -r /project/model /cromwell_root/
+		cp -r /project/predictions_and_metrics /cromwell_root/
 		#cp -r spearman.txt /cromwell_root/spearman.txt
 		
 	}
