@@ -155,6 +155,16 @@ echo  $( timestamp ): "sed -i -e" "s/<>/$counts_loss_weight/g" \
 $project_dir/bpnet_params.json | tee -a $logfile 
 sed -i -e "s/<>/$counts_loss_weight/g" $project_dir/bpnet_params.json
 
+#set threads based on number of peaks
+
+if [ $(wc -l < ${data_dir}/${experiment}_combined.bed) -lt 2000 ];then
+    threads=1
+else
+    threads=2
+fi
+
+
+
 echo $( timestamp ): "
 train \\
     --input-data $project_dir/training_input.json \\
@@ -171,7 +181,7 @@ train \\
     --model-output-filename $1 \\
     --input-seq-len 2114 \\
     --output-len 1000 \\
-    --threads 2 \\
+    --threads $threads \\
     --learning-rate 0.004" | tee -a $logfile 
 
 train \
@@ -189,7 +199,7 @@ train \
     --model-output-filename $1 \
     --input-seq-len 2114 \
     --output-len 1000 \
-    --threads 2 \
+    --threads $threads \
     --learning-rate 0.004
 
 echo $( timestamp ): "
