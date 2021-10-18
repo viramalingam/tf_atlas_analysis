@@ -45,7 +45,6 @@ task run_modelling {
 		Array[File] predictions_and_metrics = glob("predictions_and_metrics/*")
 		#Float spearman = read_float("spearman.txt")
 	
-
 	
 	}
 
