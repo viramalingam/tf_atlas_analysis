@@ -62,13 +62,23 @@ predictions_dir=$project_dir/predictions_and_metrics
 echo $( timestamp ): "mkdir" $predictions_dir | tee -a $logfile
 mkdir $predictions_dir
 
+echo $reference_file
 
 echo $( timestamp ): "cp" $reference_file ${reference_dir}/hg38.genome.fa | \
 tee -a $logfile 
+
+echo $reference_file_index
+
 echo $( timestamp ): "cp" $reference_file_index ${reference_dir}/hg38.genome.fa.fai |\
 tee -a $logfile 
-echo $( timestamp ): "cp" $chroms_txt ${reference_dir}/chrom.sizes |\
+
+echo $chrom_sizes
+
+echo $( timestamp ): "cp" $chrom_sizes ${reference_dir}/chrom.sizes |\
 tee -a $logfile 
+
+echo $chroms_txt
+
 echo $( timestamp ): "cp" $chroms_txt ${reference_dir}/hg38_chroms.txt |\
 tee -a $logfile 
 
@@ -79,6 +89,8 @@ cp $reference_file $reference_dir/hg38.genome.fa
 cp $reference_file_index $reference_dir/hg38.genome.fa.fai
 cp $chrom_sizes $reference_dir/chrom.sizes
 cp $chroms_txt $reference_dir/hg38_chroms.txt
+
+ls -al $reference_dir/*
 
 # Step 1: Copy the bigwig and peak files
 
