@@ -25,8 +25,10 @@ task run_outlier_detection {
 		/my_scripts/tf_atlas_analysis/outlier_detection.sh ${experiment} ${input_outlier_json} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
 
 		echo "copying all files to cromwell_root folder"
+
+		gzip /project/peaks_inliers.bed
 		
-		cp /project/peaks_inliers.bed /cromwell_root/peaks_inliers.bed
+		cp /project/peaks_inliers.bed.gz /cromwell_root/peaks_inliers.bed
 		
 	}
 	
