@@ -68,8 +68,6 @@ cp $peaks ${data_dir}/${experiment}.bed.gz
 echo $( timestamp ): "gunzip" ${data_dir}/${experiment}.bed.gz |\
 tee -a $logfile 
 
-gunzip ${data_dir}/${experiment}.bed.gz
-
 
 # download input json
 
