@@ -99,5 +99,7 @@ outliers \
     --chrom-sizes $reference_dir/chrom.sizes \
     --chroms $(paste -s -d ' ' $reference_dir/hg38_chroms.txt) \
     --sequence-len 2114 \
-    --output-bed ${experiment}_inliers.bed
+    --output-bed peaks_inliers.bed
+
+
     
