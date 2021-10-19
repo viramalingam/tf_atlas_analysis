@@ -9,7 +9,7 @@ function timestamp {
 }
 
 experiment=$1
-input_outlier_json=$2
+input_outliers_json=$2
 reference_file=$3
 reference_file_index=$4
 chrom_sizes=$5
