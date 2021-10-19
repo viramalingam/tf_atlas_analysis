@@ -28,12 +28,12 @@ task run_outlier_detection {
 
 		gzip /project/peaks_inliers.bed
 		
-		cp /project/peaks_inliers.bed.gz /cromwell_root/peaks_inliers.bed
+		cp /project/peaks_inliers.bed.gz /cromwell_root/peaks_inliers.bed.gz
 		
 	}
 	
 	output {
-		File peaks_inliers_bed = "peaks_inliers.bed"
+		File peaks_inliers_bed = "peaks_inliers.bed.gz"
 	
 	
 	}
