@@ -4,8 +4,6 @@ task run_outlier_detection {
 	input {
 		String experiment
 		File input_outlier_json
-		File reference_file
-		File reference_file_index
 		File chrom_sizes
 		File chroms_txt
 		Array [File] bigwigs
@@ -23,8 +21,8 @@ task run_outlier_detection {
 
 		##outlier_detection
 
-		echo "run /my_scripts/tf_atlas_analysis/outlier_detection.sh" ${experiment} ${input_outlier_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
-		/my_scripts/tf_atlas_analysis/outlier_detection.sh ${experiment} ${input_outlier_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
+		echo "run /my_scripts/tf_atlas_analysis/outlier_detection.sh" ${experiment} ${input_outlier_json} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
+		/my_scripts/tf_atlas_analysis/outlier_detection.sh ${experiment} ${input_outlier_json} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
 
 		echo "copying all files to cromwell_root folder"
 		
@@ -51,8 +49,6 @@ workflow outlier_detection {
 	input {
 		String experiment
 		File input_outlier_json
-		File reference_file
-		File reference_file_index
 		File chrom_sizes
 		File chroms_txt
 		Array [File] bigwigs
@@ -63,8 +59,6 @@ workflow outlier_detection {
 		input:
 			experiment = experiment,
 			input_outlier_json = input_outlier_json,
-			reference_file = reference_file,
-			reference_file_index = reference_file_index,	
 			chrom_sizes = chrom_sizes,
 			chroms_txt = chroms_txt,
 			bigwigs = bigwigs,

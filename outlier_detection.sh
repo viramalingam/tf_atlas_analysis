@@ -10,12 +10,10 @@ function timestamp {
 
 experiment=$1
 input_outliers_json=$2
-reference_file=$3
-reference_file_index=$4
-chrom_sizes=$5
-chroms_txt=${6}
-bigwigs=${7}
-peaks=${8}
+chrom_sizes=$3
+chroms_txt=${4}
+bigwigs=${5}
+peaks=${6}
 
 # create the log file
 logfile=$project_dir/${1}_outliers.log
@@ -51,8 +49,6 @@ tee -a $logfile
 
 # copy down data and reference
 
-cp $reference_file $reference_dir/hg38.genome.fa
-cp $reference_file_index $reference_dir/hg38.genome.fa.fai
 cp $chrom_sizes $reference_dir/chrom.sizes
 cp $chroms_txt $reference_dir/hg38_chroms.txt
 
