@@ -22,18 +22,6 @@ peaks=${11}
 learning_rate=${12}
 
 
-echo $experiment
-echo $input_json
-echo $training_input_json
-echo $bpnet_params_json
-echo $splits_json
-echo reference_file = $reference_file
-echo reference_file_index= $reference_file_index
-echo chrom_sizes = $chrom_sizes
-echo chroms_txt = $chroms_txt
-echo $bigwigs
-echo $peaks
-
 mkdir /project
 project_dir=/project
 
@@ -82,7 +70,6 @@ cp $reference_file_index $reference_dir/hg38.genome.fa.fai
 cp $chrom_sizes $reference_dir/chrom.sizes
 cp $chroms_txt $reference_dir/hg38_chroms.txt
 
-ls -al $reference_dir/*
 
 # Step 1: Copy the bigwig and peak files
 
