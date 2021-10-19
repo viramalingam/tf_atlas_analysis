@@ -89,7 +89,7 @@ outliers \\
     --chrom-sizes $reference_dir/chrom.sizes \\
     --chroms $(paste -s -d ' ' $reference_dir/hg38_chroms.txt) \\
     --sequence-len 2114 \\
-    --output-bed ${experiment}_inliers.bed" | tee -a $logfile 
+    --output-bed $project_dir/peaks_inliers.bed" | tee -a $logfile 
     
 outliers \
     --input-data $project_dir/input_outliers.json  \
@@ -99,7 +99,7 @@ outliers \
     --chrom-sizes $reference_dir/chrom.sizes \
     --chroms $(paste -s -d ' ' $reference_dir/hg38_chroms.txt) \
     --sequence-len 2114 \
-    --output-bed peaks_inliers.bed
+    --output-bed $project_dir/peaks_inliers.bed
 
 
     
