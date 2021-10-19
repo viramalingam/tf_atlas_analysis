@@ -71,7 +71,7 @@ workflow outlier_detection {
 			peaks = peaks
  	}
 	output {
-		File peaks_inliers_bed = run_modelling.peaks_inliers_bed
+		File peaks_inliers_bed = run_outlier_detection.peaks_inliers_bed
 		
 	}
 }
