@@ -88,7 +88,7 @@ tee -a $logfile
 
 gunzip ${data_dir}/${experiment}_combined.bed.gz
 
-
+ls ${data_dir}
 
 
 # cp input json template
