@@ -7,6 +7,7 @@ task run_gc_matched_negatives {
 		File reference_file_index
 		File chrom_sizes
 		File chroms_txt
+		File reference_gc_hg38_nosmooth
 		File peaks
 
   	}	
@@ -23,8 +24,8 @@ task run_gc_matched_negatives {
 
 		##outlier_detection
 
-		echo "run /my_scripts/tf_atlas_analysis/gc_matched_negatives.sh" ${experiment} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${peaks}
-		/my_scripts/tf_atlas_analysis/gc_matched_negatives.sh ${experiment} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${peaks}
+		echo "run /my_scripts/tf_atlas_analysis/gc_matched_negatives.sh" ${experiment} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${reference_gc_hg38_nosmooth} ${peaks}
+		/my_scripts/tf_atlas_analysis/gc_matched_negatives.sh ${experiment} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${reference_gc_hg38_nosmooth} ${peaks}
 
 		echo "copying all files to cromwell_root folder"
 
@@ -56,6 +57,7 @@ workflow gc_matched_negatives {
 		File reference_file_index
 		File chrom_sizes
 		File chroms_txt
+		File reference_gc_hg38_nosmooth
 		File peaks
 	}
 
@@ -66,6 +68,7 @@ workflow gc_matched_negatives {
 			reference_file_index = reference_file_index,
 			chrom_sizes = chrom_sizes,
 			chroms_txt = chroms_txt,
+			reference_gc_hg38_nosmooth = reference_gc_hg38_nosmooth,
 			peaks = peaks
  	}
 	output {

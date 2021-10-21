@@ -14,7 +14,8 @@ reference_file=$2
 reference_file_index=$3
 chrom_sizes=$4
 chroms_txt=$5
-peaks=$6
+reference_gc_hg38_nosmooth=$6
+peaks=$7
 
 mkdir /project
 project_dir=/project
@@ -60,6 +61,8 @@ tee -a $logfile
 echo $( timestamp ): "cp" $chroms_txt ${reference_dir}/hg38_chroms.txt |\
 tee -a $logfile 
 
+echo $( timestamp ): "cp" $reference_gc_hg38_nosmooth ${reference_dir}/gc_hg38_nosmooth.tsv |\
+tee -a $logfile 
 
 # copy down data and reference
 
@@ -67,7 +70,7 @@ cp $reference_file ${reference_dir}/hg38.genome.fa
 cp $reference_file_index ${reference_dir}/hg38.genome.fa.fai
 cp $chrom_sizes $reference_dir/chrom.sizes
 cp $chroms_txt $reference_dir/hg38_chroms.txt
-
+cp $reference_gc_hg38_nosmooth ${reference_dir}/gc_hg38_nosmooth.tsv
 
 
 
