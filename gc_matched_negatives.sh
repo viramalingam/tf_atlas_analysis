@@ -113,7 +113,7 @@ python /my_scripts/tf_atlas_analysis/create_negatives_bed.py \\
 python /my_scripts/tf_atlas_analysis/create_negatives_bed.py \
     --out-bed $data_dir/peaks_gc_neg_combined.bed \
     --neg-pickle $data_dir/${experiment}.gc.p \
-    --ref-fasta $reference_dir/hg38.genome.fa1 \
+    --ref-fasta $reference_dir/hg38.genome.fa \
     --peaks $data_dir/${experiment}.gc
 
     
