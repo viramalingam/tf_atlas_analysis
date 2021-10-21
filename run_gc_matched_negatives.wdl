@@ -1,6 +1,6 @@
 version 1.0
 
-task run_outlier_detection {
+task run_gc_matched_negatives {
 	input {
 		String experiment
 		File input_outlier_json
@@ -16,30 +16,30 @@ task run_outlier_detection {
 		cd /my_scripts
 		git clone https://github.com/viramalingam/tf_atlas_analysis.git
 		chmod -R 777 tf_atlas_analysis
-		cd tf_atlas_analysis/kubernetes/outlier_detection/
+		cd tf_atlas_analysis/kubernetes/gc_matched_negatives/
 
 
 		##outlier_detection
 
-		echo "run /my_scripts/tf_atlas_analysis/outlier_detection.sh" ${experiment} ${input_outlier_json} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
-		/my_scripts/tf_atlas_analysis/outlier_detection.sh ${experiment} ${input_outlier_json} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
+		echo "run /my_scripts/tf_atlas_analysis/gc_matched_negatives.sh" ${experiment} ${input_outlier_json} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
+		/my_scripts/tf_atlas_analysis/gc_matched_negatives.sh ${experiment} ${input_outlier_json} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
 
 		echo "copying all files to cromwell_root folder"
 
-		gzip /project/peaks_inliers.bed
+		gzip /project/peaks_gc_neg_combined.bed
 		
-		cp /project/peaks_inliers.bed.gz /cromwell_root/peaks_inliers.bed.gz
+		cp /project/peaks_gc_neg_combined.bed.bed.gz /cromwell_root/peaks_gc_neg_combined.bed.gz
 		
 	}
 	
 	output {
-		File peaks_inliers_bed = "peaks_inliers.bed.gz"
+		File peaks_gc_neg_combined_bed = "peaks_gc_neg_combined.bed.gz"
 	
 	
 	}
 
 	runtime {
-		docker: 'kundajelab/tf-atlas:gcp-outliers'
+		docker: 'kundajelab/tf-atlas:gcp-gc_matching'
 		memory: 30 + "GB"
 		bootDiskSizeGb: 100
 		disks: "local-disk 250 HDD"
@@ -47,7 +47,7 @@ task run_outlier_detection {
 	}
 }
 
-workflow outlier_detection {
+workflow gc_matched_negatives {
 	input {
 		String experiment
 		File input_outlier_json
@@ -57,7 +57,7 @@ workflow outlier_detection {
 		File peaks
 	}
 
-	call run_outlier_detection {
+	call run_gc_matched_negatives {
 		input:
 			experiment = experiment,
 			input_outlier_json = input_outlier_json,
@@ -67,7 +67,7 @@ workflow outlier_detection {
 			peaks = peaks
  	}
 	output {
-		File peaks_inliers_bed = run_outlier_detection.peaks_inliers_bed
+		File peaks_gc_neg_combined_bed = run_outlier_detection.peaks_gc_neg_combined_bed
 		
 	}
 }

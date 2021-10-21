@@ -34,11 +34,6 @@ mkdir $reference_dir
 
 
 # copy down data and reference
-echo $( timestamp ): "cp" $reference_file ${reference_dir}/hg38.genome.fa | \
-tee -a $logfile 
-
-echo $( timestamp ): "cp" $reference_file_index ${reference_dir}/hg38.genome.fa.fai |\
-tee -a $logfile 
 
 echo $( timestamp ): "cp" $chrom_sizes ${reference_dir}/chrom.sizes |\
 tee -a $logfile 
@@ -64,9 +59,6 @@ echo $( timestamp ): "cp" $peaks ${data_dir}/${experiment}.bed.gz |\
 tee -a $logfile 
 
 cp $peaks ${data_dir}/${experiment}.bed.gz
-
-echo $( timestamp ): "gunzip" ${data_dir}/${experiment}.bed.gz |\
-tee -a $logfile 
 
 
 # download input json
@@ -100,6 +92,3 @@ outliers \
     --chroms $(paste -s -d ' ' $reference_dir/hg38_chroms.txt) \
     --sequence-len 2114 \
     --output-bed $project_dir/peaks_inliers.bed
-
-
-    
