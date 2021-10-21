@@ -69,7 +69,7 @@ workflow gc_matched_negatives {
 			peaks = peaks
  	}
 	output {
-		File peaks_gc_neg_combined_bed = run_outlier_detection.peaks_gc_neg_combined_bed
+		File peaks_gc_neg_combined_bed = run_gc_matched_negatives.peaks_gc_neg_combined_bed
 		
 	}
 }
