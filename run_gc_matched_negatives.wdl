@@ -3,10 +3,10 @@ version 1.0
 task run_gc_matched_negatives {
 	input {
 		String experiment
-		File input_outlier_json
+		File reference_file
+		File reference_file_index
 		File chrom_sizes
 		File chroms_txt
-		Array [File] bigwigs
 		File peaks
 
   	}	
@@ -19,16 +19,18 @@ task run_gc_matched_negatives {
 		cd tf_atlas_analysis/kubernetes/gc_matched_negatives/
 
 
+
+
 		##outlier_detection
 
-		echo "run /my_scripts/tf_atlas_analysis/gc_matched_negatives.sh" ${experiment} ${input_outlier_json} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
-		/my_scripts/tf_atlas_analysis/gc_matched_negatives.sh ${experiment} ${input_outlier_json} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
+		echo "run /my_scripts/tf_atlas_analysis/gc_matched_negatives.sh" ${experiment} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${peaks}
+		/my_scripts/tf_atlas_analysis/gc_matched_negatives.sh ${experiment} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${peaks}
 
 		echo "copying all files to cromwell_root folder"
 
-		gzip /project/peaks_gc_neg_combined.bed
+		gzip /project/data/peaks_gc_neg_combined.bed
 		
-		cp /project/peaks_gc_neg_combined.bed.bed.gz /cromwell_root/peaks_gc_neg_combined.bed.gz
+		cp /project/data/peaks_gc_neg_combined.bed.gz /cromwell_root/peaks_gc_neg_combined.bed.gz
 		
 	}
 	
@@ -50,20 +52,20 @@ task run_gc_matched_negatives {
 workflow gc_matched_negatives {
 	input {
 		String experiment
-		File input_outlier_json
+		File reference_file
+		File reference_file_index
 		File chrom_sizes
 		File chroms_txt
-		Array [File] bigwigs
 		File peaks
 	}
 
 	call run_gc_matched_negatives {
 		input:
 			experiment = experiment,
-			input_outlier_json = input_outlier_json,
+			reference_file = reference_file,
+			reference_file_index = reference_file_index,
 			chrom_sizes = chrom_sizes,
 			chroms_txt = chroms_txt,
-			bigwigs = bigwigs,
 			peaks = peaks
  	}
 	output {
