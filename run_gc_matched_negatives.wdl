@@ -42,7 +42,7 @@ task run_gc_matched_negatives {
 	}
 
 	runtime {
-		docker: 'kundajelab/tf-atlas:gcp-gc-matched-negatives'
+		docker: 'vivekramalingam/tf-atlas:gcp-gc_matching'
 		memory: 30 + "GB"
 		bootDiskSizeGb: 100
 		disks: "local-disk 250 HDD"
