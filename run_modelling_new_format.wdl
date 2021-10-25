@@ -36,6 +36,7 @@ task run_modelling {
 		cp -r /project/predictions_and_metrics /cromwell_root/
 		cp -r /project/predictions_and_metrics/spearman.txt /cromwell_root/spearman.txt
 		cp -r /project/predictions_and_metrics/pearson.txt /cromwell_root/pearson.txt
+		cp -r /project/predictions_and_metrics/jsd.txt /cromwell_root/jsd.txt
 		
 	}
 	
@@ -45,6 +46,7 @@ task run_modelling {
 		Array[File] predictions_and_metrics = glob("predictions_and_metrics/*")
 		Float spearman = read_float("spearman.txt")
 		Float pearson = read_float("pearson.txt")
+		Float jsd = read_float("jsd.txt")
 	
 	
 	}
@@ -97,6 +99,7 @@ workflow modelling {
 		Array[File] predictions_and_metrics = run_modelling.predictions_and_metrics
 		Float spearman = run_modelling.spearman
 		Float pearson = run_modelling.pearson
+		Float jsd = run_modelling.jsd
 		
 	}
 }
