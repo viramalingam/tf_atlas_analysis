@@ -223,5 +223,5 @@ fastpredict \
 
 tail -n 1 $predictions_dir/predict.log | awk '{print $NF}' > $predictions_dir/spearman.txt
 tail -n 2 $predictions_dir/predict.log | head -n 1 | awk '{print $NF}' > $predictions_dir/pearson.txt
-tail -n 7 /mnt/lab_data3/zahoor/pipeline_outputs/metrics_analysis/predictions_and_metrics/ENCSR999JKC/predict.log | head -n 1 | awk '{print $NF}' > jsd.txt
+tail -n 7 $predictions_dir/predict.log | head -n 1 | awk '{print $NF}' > jsd.txt
 
