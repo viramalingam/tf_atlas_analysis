@@ -39,10 +39,10 @@ task run_outlier_detection {
 	}
 
 	runtime {
-		docker: 'kundajelab/tf-atlas:gcp-outliers'
+		docker: 'vivekramalingam/tf-atlas:gcp-outliers'
 		memory: 30 + "GB"
-		bootDiskSizeGb: 100
-		disks: "local-disk 250 HDD"
+		bootDiskSizeGb: 50
+		disks: "local-disk 50 SSD"
 
 	}
 }

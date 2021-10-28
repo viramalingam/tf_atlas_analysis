@@ -80,7 +80,7 @@ outliers \\
     --task 0 \\
     --chrom-sizes $reference_dir/chrom.sizes \\
     --chroms $(paste -s -d ' ' $reference_dir/hg38_chroms.txt) \\
-    --sequence-len 2114 \\
+    --sequence-len 1000 \\
     --output-bed $project_dir/peaks_inliers.bed" | tee -a $logfile 
     
 outliers \
@@ -90,5 +90,5 @@ outliers \
     --task 0 \
     --chrom-sizes $reference_dir/chrom.sizes \
     --chroms $(paste -s -d ' ' $reference_dir/hg38_chroms.txt) \
-    --sequence-len 2114 \
+    --sequence-len 1000 \
     --output-bed $project_dir/peaks_inliers.bed
