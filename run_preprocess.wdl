@@ -34,7 +34,7 @@ task run_preprocess {
 		##preprocessing
 		echo "run ../run_preprocess.sh"
 		../run_preprocess.sh params_file.json ${encode_access_key} ${encode_secret_key} ${pipeline_destination} ${reference_file} ${reference_file_index} ${chrom_sizes}
-		cp downloads/*.bed.gz /cromwell_root/peaks.bed
+		cp downloads/*.bed.gz /cromwell_root/peaks.bed.gz
 		cp -r bigWigs /cromwell_root/
 		
 	}
@@ -50,7 +50,7 @@ task run_preprocess {
 		docker: 'vivekramalingam/tf-atlas'
 		memory: 20 + "GB"
 		bootDiskSizeGb: 100
-		disks: "local-disk 1000 HDD"
+		disks: "local-disk 400 HDD"
 	}
 }
 
