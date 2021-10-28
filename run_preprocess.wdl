@@ -41,7 +41,7 @@ task run_preprocess {
 	
 	output {
 		File params_json = "params_file.json"
-		File peaks_bed = "peaks.bed"
+		File peaks_bed = "peaks.bed.gz"
 		Array[File] output_bw = glob("bigWigs/*.bigWig")
 	
 	}
