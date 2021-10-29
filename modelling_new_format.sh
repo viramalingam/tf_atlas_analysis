@@ -143,7 +143,7 @@ sed -i -e "s/<>/$counts_loss_weight/g" $project_dir/bpnet_params.json
 
 #set threads based on number of peaks
 
-if [ $(wc -l < ${data_dir}/${experiment}_combined.bed) -lt 2000 ];then
+if [ $(wc -l < ${data_dir}/${experiment}_combined.bed) -lt 3500 ];then
     threads=1
 else
     threads=2
