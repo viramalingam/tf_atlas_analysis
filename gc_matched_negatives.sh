@@ -74,6 +74,7 @@ cp $chroms_txt $reference_dir/hg38_chroms.txt
 cp $reference_gc_hg38_nosmooth ${reference_dir}/gc_hg38_nosmooth.tsv
 
 
+ls /tfatlas/SVM_pipelines/make_inputs/
 
 echo $( timestamp ): "
 python /tfatlas/SVM_pipelines/make_inputs/get_gc_content.py \\
