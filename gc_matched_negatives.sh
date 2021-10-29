@@ -85,7 +85,7 @@ python /tfatlas/SVM_pipelines/make_inputs/get_gc_content.py \\
        --flank_size 1057 \\
        --store_seq" | tee -a $logfile 
 
-python get_gc_content.py \
+python /tfatlas/SVM_pipelines/make_inputs/get_gc_content.py \
        --input_bed $data_dir/${1}_inliers.bed \
        --ref_fasta $reference_dir/hg38.genome.fa \
        --out_prefix $data_dir/$experiment.gc \
@@ -104,7 +104,7 @@ python /tfatlas/SVM_pipelines/make_inputs/get_chrom_gc_region_dict.py \\
     --input_bed $data_dir/${experiment}.tsv \\
     --outf $data_dir/${experiment}.gc.p" | tee -a $logfile 
 
-python get_chrom_gc_region_dict.py \
+python /tfatlas/SVM_pipelines/make_inputs/get_chrom_gc_region_dict.py \
     --input_bed $data_dir/$experiment.tsv \
     --outf $data_dir/${experiment}.gc.p
 
@@ -115,7 +115,7 @@ python /tfatlas/SVM_pipelines/make_inputs/create_negatives_bed.py \\
     --ref-fasta $reference_dir/hg38.genome.fa \\
     --peaks $data_dir/${experiment}.gc" | tee -a $logfile 
 
-python create_negatives_bed.py \
+python /tfatlas/SVM_pipelines/make_inputs/create_negatives_bed.py \
     --out-bed $data_dir/${experiment}_negatives.bed \
     --neg-pickle $data_dir/${experiment}.gc.p \
     --ref-fasta $reference_dir/hg38.genome.fa \
