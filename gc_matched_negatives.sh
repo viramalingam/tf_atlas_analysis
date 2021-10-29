@@ -97,52 +97,52 @@ echo $( timestamp ): "bedtools intersect -v -a" $reference_dir/gc_hg38_nosmooth.
 "-b" $data_dir/${1}_inliers.bed > $data_dir/${experiment}.tsv  | tee -a $logfile 
 
 bedtools intersect -v -a $reference_dir/gc_hg38_nosmooth.tsv \
--b $data_dir/${1}_inliers.bed > $data_dir/${experiment}.tsv
+-b $data_dir/${1}_inliers.bed > $data_dir/intersect.tsv
 
-echo $( timestamp ): "
-python /tfatlas/SVM_pipelines/make_inputs/get_chrom_gc_region_dict.py \\
-    --input_bed $data_dir/${experiment}.tsv \\
-    --outf $data_dir/${experiment}.gc.p" | tee -a $logfile 
+# echo $( timestamp ): "
+# python /tfatlas/SVM_pipelines/make_inputs/get_chrom_gc_region_dict.py \\
+#     --input_bed $data_dir/${experiment}.tsv \\
+#     --outf $data_dir/${experiment}.gc.p" | tee -a $logfile 
 
-python /tfatlas/SVM_pipelines/make_inputs/get_chrom_gc_region_dict.py \
-    --input_bed $data_dir/$experiment.tsv \
-    --outf $data_dir/${experiment}.gc.p
+# python /tfatlas/SVM_pipelines/make_inputs/get_chrom_gc_region_dict.py \
+#     --input_bed $data_dir/$experiment.tsv \
+#     --outf $data_dir/${experiment}.gc.p
 
-echo $( timestamp ): "
-python /tfatlas/SVM_pipelines/make_inputs/create_negatives_bed.py \\
-    --out-bed $data_dir/${experiment}_negatives.bed \\
-    --neg-pickle $data_dir/$experiment.gc.p \\
-    --ref-fasta $reference_dir/hg38.genome.fa \\
-    --peaks $data_dir/${experiment}.gc" | tee -a $logfile 
+# echo $( timestamp ): "
+# python /tfatlas/SVM_pipelines/make_inputs/create_negatives_bed.py \\
+#     --out-bed $data_dir/${experiment}_negatives.bed \\
+#     --neg-pickle $data_dir/$experiment.gc.p \\
+#     --ref-fasta $reference_dir/hg38.genome.fa \\
+#     --peaks $data_dir/${experiment}.gc" | tee -a $logfile 
 
-python /tfatlas/SVM_pipelines/make_inputs/create_negatives_bed.py \
-    --out-bed $data_dir/${experiment}_negatives.bed \
-    --neg-pickle $data_dir/${experiment}.gc.p \
-    --ref-fasta $reference_dir/hg38.genome.fa \
-    --peaks $data_dir/${experiment}.gc
+# python /tfatlas/SVM_pipelines/make_inputs/create_negatives_bed.py \
+#     --out-bed $data_dir/${experiment}_negatives.bed \
+#     --neg-pickle $data_dir/${experiment}.gc.p \
+#     --ref-fasta $reference_dir/hg38.genome.fa \
+#     --peaks $data_dir/${experiment}.gc
 
-# select negatives based on specified ratio
+# # select negatives based on specified ratio
 
-# count the number of lines in the bed file
-echo $( timestamp ): "num_negatives=`cat $data_dir/${experiment}_negatives.bed | wc -l`" | tee -a $logfile 
-num_negatives=`cat $data_dir/${experiment}_negatives.bed | wc -l`
+# # count the number of lines in the bed file
+# echo $( timestamp ): "num_negatives=`cat $data_dir/${experiment}_negatives.bed | wc -l`" | tee -a $logfile 
+# num_negatives=`cat $data_dir/${experiment}_negatives.bed | wc -l`
 
-# number of lines to select
-echo $( timestamp ): "num_select=($num_negatives / $ratio)" | tee -a $logfile 
-num_select=$(( num_negatives / ratio ))
+# # number of lines to select
+# echo $( timestamp ): "num_select=($num_negatives / $ratio)" | tee -a $logfile 
+# num_select=$(( num_negatives / ratio ))
 
-# select random rows
-echo $( timestamp ): "shuf -n" $num_select $data_dir/${experiment}_negatives.bed \
-">" $data_dir/${experiment}_negatives_select.bed | tee -a $logfile 
-shuf -n $num_select $data_dir/${experiment}_negatives.bed > \
-    $data_dir/${experiment}_negatives_select.bed
+# # select random rows
+# echo $( timestamp ): "shuf -n" $num_select $data_dir/${experiment}_negatives.bed \
+# ">" $data_dir/${experiment}_negatives_select.bed | tee -a $logfile 
+# shuf -n $num_select $data_dir/${experiment}_negatives.bed > \
+#     $data_dir/${experiment}_negatives_select.bed
 
-# combine the gc matched negatives and the original peaks file into 
-# a single file
-echo $( timestamp ): "cat" $data_dir/${1}_inliers.bed $data_dir/${experiment}_negatives_select.bed ">" \
-    $data_dir/peaks_gc_neg_combined.bed  | tee -a $logfile 
+# # combine the gc matched negatives and the original peaks file into 
+# # a single file
+# echo $( timestamp ): "cat" $data_dir/${1}_inliers.bed $data_dir/${experiment}_negatives_select.bed ">" \
+#     $data_dir/peaks_gc_neg_combined.bed  | tee -a $logfile 
 
-cat $data_dir/${1}_inliers.bed $data_dir/${experiment}_negatives_select.bed > \
-    $data_dir/peaks_gc_neg_combined.bed
+# cat $data_dir/${1}_inliers.bed $data_dir/${experiment}_negatives_select.bed > \
+#     $data_dir/peaks_gc_neg_combined.bed
 
     

@@ -32,12 +32,12 @@ task run_gc_matched_negatives {
 
 		gzip /project/data/peaks_gc_neg_combined.bed
 		
-		cp /project/data/peaks_gc_neg_combined.bed.gz /cromwell_root/peaks_gc_neg_combined.bed.gz
+		cp /project/data/intersect.tsv /cromwell_root/intersect.tsv
 		
 	}
 	
 	output {
-		File peaks_gc_neg_combined_bed = "peaks_gc_neg_combined.bed.gz"
+		File peaks_gc_neg_combined_bed = "intersect.tsv"
 	
 	
 	}
