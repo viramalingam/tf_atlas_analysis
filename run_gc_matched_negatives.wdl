@@ -44,7 +44,7 @@ task run_gc_matched_negatives {
 
 	runtime {
 		docker: 'vivekramalingam/tf-atlas:gcp-gc_matching'
-		memory: 30 + "GB"
+		memory: 200 + "GB"
 		bootDiskSizeGb: 100
 		disks: "local-disk 250 HDD"
 
