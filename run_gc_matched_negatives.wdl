@@ -32,19 +32,19 @@ task run_gc_matched_negatives {
 
 		gzip /project/data/peaks_gc_neg_combined.bed
 		
-		cp /project/data/intersect.tsv /cromwell_root/intersect.tsv
+		cp /project/data/peaks_gc_neg_combined.bed.gz /cromwell_root/peaks_gc_neg_combined.bed.gz
 		
 	}
 	
 	output {
-		File peaks_gc_neg_combined_bed = "intersect.tsv"
+		File peaks_gc_neg_combined_bed = "peaks_gc_neg_combined.bed.gz"
 	
 	
 	}
 
 	runtime {
 		docker: 'vivekramalingam/tf-atlas:gcp-gc_matching'
-		memory: 200 + "GB"
+		memory: 100 + "GB"
 		bootDiskSizeGb: 100
 		disks: "local-disk 250 HDD"
 
