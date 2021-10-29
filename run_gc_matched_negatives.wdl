@@ -71,7 +71,7 @@ workflow gc_matched_negatives {
 			chrom_sizes = chrom_sizes,
 			chroms_txt = chroms_txt,
 			reference_gc_hg38_nosmooth = reference_gc_hg38_nosmooth,
-			peaks = peaks
+			peaks = peaks,
 			ratio = ratio
  	}
 	output {
