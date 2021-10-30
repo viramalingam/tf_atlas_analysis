@@ -5,6 +5,7 @@ task run_modelling {
 		String experiment
 		File input_json
 		File training_input_json
+		File testing_input_json
 		File bpnet_params_json
 		File splits_json
 		File reference_file
@@ -13,7 +14,10 @@ task run_modelling {
 		File chroms_txt
 		Array [File] bigwigs
 		File peaks
+		File peaks_for_testing
 		Float learning_rate
+
+
   	}	
 	command {
 		#create data directories and download scripts
@@ -26,24 +30,31 @@ task run_modelling {
 
 		##modelling
 
-		echo "run /my_scripts/tf_atlas_analysis/modelling_new_format.sh" ${experiment} ${input_json} ${training_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} ${learning_rate}
-		/my_scripts/tf_atlas_analysis/modelling_new_format.sh ${experiment} ${input_json} ${training_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} ${learning_rate}
+		echo "run /my_scripts/tf_atlas_analysis/modelling_new_format.sh" ${experiment} ${input_json} ${training_input_json} ${testing_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} ${peaks_for_testing} ${learning_rate}
+		/my_scripts/tf_atlas_analysis/modelling_new_format.sh ${experiment} ${input_json} ${training_input_json} ${testing_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} ${peaks_for_testing} ${learning_rate}
 
 		echo "copying all files to cromwell_root folder"
 		
 		cp /project/bpnet_params.json /cromwell_root/bpnet_params.json
 		cp -r /project/model /cromwell_root/
-		cp -r /project/predictions_and_metrics /cromwell_root/
-		cp -r /project/predictions_and_metrics/spearman.txt /cromwell_root/spearman.txt
-		cp -r /project/predictions_and_metrics/pearson.txt /cromwell_root/pearson.txt
-		cp -r /project/predictions_and_metrics/jsd.txt /cromwell_root/jsd.txt
+		cp -r /project/predictions_and_metrics_test_peaks_test_chroms /cromwell_root/
+		cp -r /project/predictions_and_metrics_all_peaks_test_chroms /cromwell_root/
+		cp -r /project/predictions_and_metrics_all_peaks_all_chroms /cromwell_root/
+
+
+		cp -r /project/predictions_and_metrics_test_peaks_test_chroms/spearman.txt /cromwell_root/spearman.txt
+		cp -r /project/predictions_and_metrics_test_peaks_test_chroms/pearson.txt /cromwell_root/pearson.txt
+		cp -r /project/predictions_and_metrics_test_peaks_test_chroms/jsd.txt /cromwell_root/jsd.txt
 		
 	}
 	
 	output {
 		File bpnet_params_updated_json = "bpnet_params.json"
 		Array[File] model = glob("model/*")
-		Array[File] predictions_and_metrics = glob("predictions_and_metrics/*")
+		Array[File] predictions_and_metrics_test_peaks_test_chroms = glob("predictions_and_metrics_test_peaks_test_chroms/*")
+		Array[File] predictions_and_metrics_all_peaks_all_chroms = glob("predictions_and_metrics_all_peaks_all_chroms/*")
+		Array[File] predictions_and_metrics_all_peaks_test_chroms = glob("predictions_and_metrics_all_peaks_test_chroms/*")
+
 		Float spearman = read_float("spearman.txt")
 		Float pearson = read_float("pearson.txt")
 		Float jsd = read_float("jsd.txt")
@@ -67,6 +78,7 @@ workflow modelling {
 		String experiment
 		File input_json
 		File training_input_json
+		File testing_input_json
 		File bpnet_params_json
 		File splits_json
 		File reference_file
@@ -75,7 +87,9 @@ workflow modelling {
 		File chroms_txt
 		Array [File] bigwigs
 		File peaks
+		File peaks_for_testing
 		Float learning_rate
+
 	}
 
 	call run_modelling {
@@ -83,6 +97,7 @@ workflow modelling {
 			experiment = experiment,
 			input_json = input_json,
 			training_input_json = training_input_json,
+			testing_input_json = testing_input_json,
 			bpnet_params_json = bpnet_params_json,
 			splits_json = splits_json,
 			reference_file = reference_file,
@@ -91,12 +106,15 @@ workflow modelling {
 			chroms_txt = chroms_txt,
 			bigwigs = bigwigs,
 			peaks = peaks,
+			peaks_for_testing = peaks_for_testing,
 			learning_rate = learning_rate
  	}
 	output {
 		File bpnet_params_updated_json = run_modelling.bpnet_params_updated_json
 		Array[File] model = run_modelling.model
-		Array[File] predictions_and_metrics = run_modelling.predictions_and_metrics
+		Array[File] predictions_and_metrics_all_peaks_test_chroms = run_modelling.predictions_and_metrics_all_peaks_test_chroms
+		Array[File] predictions_and_metrics_test_peaks_test_chroms = run_modelling.predictions_and_metrics_test_peaks_test_chroms
+		Array[File] predictions_and_metrics_all_peaks_all_chroms = run_modelling.predictions_and_metrics_all_peaks_all_chroms
 		Float spearman = run_modelling.spearman
 		Float pearson = run_modelling.pearson
 		Float jsd = run_modelling.jsd
