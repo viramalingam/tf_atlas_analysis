@@ -189,7 +189,7 @@ train \\
     --chrom-sizes $reference_dir/chrom.sizes \\
     --chroms $(paste -s -d ' ' $reference_dir/hg38_chroms.txt)  \\
     --shuffle \\
-    --epochs 100 \\
+    --epochs 3 \\
     --splits $project_dir/splits.json \\
     --model-arch-name BPNet \\
     --model-arch-params-json $project_dir/bpnet_params.json \\
@@ -207,7 +207,7 @@ train \
     --chrom-sizes $reference_dir/chrom.sizes \
     --chroms $(paste -s -d ' ' $reference_dir/hg38_chroms.txt)  \
     --shuffle \
-    --epochs 100 \
+    --epochs 3 \
     --splits $project_dir/splits.json \
     --model-arch-name BPNet \
     --model-arch-params-json $project_dir/bpnet_params.json \
@@ -215,7 +215,7 @@ train \
     --model-output-filename $1 \
     --input-seq-len 2114 \
     --output-len 1000 \
-    --threads 2 \
+    --threads $threads \
     --learning-rate $learning_rate
 
 echo $( timestamp ): "
