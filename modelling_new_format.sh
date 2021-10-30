@@ -132,8 +132,9 @@ cp $training_input_json $project_dir/training_input.json
 echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/training_input.json 
 sed -i -e "s/<>/$1/g" $project_dir/training_input.json | tee -a $logfile 
 
-# Finally, the input json for the rest of the commands (without
-# gc-matched negatives)
+
+# Finally, the input json for the rest of the commands 
+
 echo $( timestamp ): "cp" $input_json \
 $project_dir/input.json | tee -a $logfile 
 cp $input_json $project_dir/input.json
@@ -143,6 +144,19 @@ cp $input_json $project_dir/input.json
 # modify the input json for 
 echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/input.json 
 sed -i -e "s/<>/$1/g" $project_dir/input.json | tee -a $logfile 
+
+
+echo $( timestamp ): "cp" $testing_json \
+$project_dir/testing.json | tee -a $logfile 
+cp $testing_json $project_dir/testing.json
+
+
+
+# modify the testing_input json for 
+echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/testing.json 
+sed -i -e "s/<>/$1/g" $project_dir/testing.json | tee -a $logfile 
+
+
 
 # cp bpnet params json template
 echo $( timestamp ): "cp" $bpnet_params_json \
