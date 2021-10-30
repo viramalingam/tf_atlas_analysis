@@ -117,6 +117,10 @@ tee -a $logfile
 gunzip ${data_dir}/${experiment}_peaks_only.bed.gz
 
 
+echo number of peaks in $peaks $(zcat ${data_dir}/${experiment}_combined.bed | wc -l)
+
+echo number of peaks in $peaks_for_testing $(zcat ${data_dir}/${experiment}_peaks_only.bed | wc -l)
+
 
 
 # cp input json template
@@ -192,7 +196,6 @@ if [ $(wc -l < ${data_dir}/${experiment}_combined.bed) -lt 3500 ];then
 else
     threads=2
 fi
-
 
 
 echo $( timestamp ): "
