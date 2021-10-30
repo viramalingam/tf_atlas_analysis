@@ -146,15 +146,15 @@ echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/input.json
 sed -i -e "s/<>/$1/g" $project_dir/input.json | tee -a $logfile 
 
 
-echo $( timestamp ): "cp" $testing_json \
-$project_dir/testing.json | tee -a $logfile 
-cp $testing_json $project_dir/testing.json
+echo $( timestamp ): "cp" $testing_input_json \
+$project_dir/testing_input.json | tee -a $logfile 
+cp $testing_input_json $project_dir/testing_input.json
 
 
 
 # modify the testing_input json for 
-echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/testing.json 
-sed -i -e "s/<>/$1/g" $project_dir/testing.json | tee -a $logfile 
+echo  $( timestamp ): "sed -i -e" "s/<>/$1/g" $project_dir/testing_input.json 
+sed -i -e "s/<>/$1/g" $project_dir/testing_input.json | tee -a $logfile 
 
 
 
