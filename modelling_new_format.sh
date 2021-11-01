@@ -215,6 +215,7 @@ train \\
     --input-seq-len 2114 \\
     --output-len 1000 \\
     --threads $threads \\
+    --reverse-complement-augmentation \\
     --learning-rate $learning_rate" | tee -a $logfile 
 
 train \
@@ -233,6 +234,7 @@ train \
     --input-seq-len 2114 \
     --output-len 1000 \
     --threads $threads \
+    --reverse-complement-augmentation \
     --learning-rate $learning_rate
 
 echo $( timestamp ): "
