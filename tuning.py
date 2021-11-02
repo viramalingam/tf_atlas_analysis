@@ -102,7 +102,7 @@ def main():
 		return loss
 	        
 	    
-	params_dict = fmin(train_model_and_return_model_loss, pbounds, algo=tpe.suggest, max_evals=2)
+	params_dict = fmin(train_model_and_return_model_loss, pbounds, algo=tpe.suggest, max_evals=50)
 
 	print(params_dict)
 
