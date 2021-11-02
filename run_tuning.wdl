@@ -54,7 +54,7 @@ task run_tuning {
 	}
 }
 
-workflow modelling {
+workflow tuning {
 	input {
 		String experiment
 		File training_input_json
