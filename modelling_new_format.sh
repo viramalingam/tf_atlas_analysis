@@ -187,7 +187,7 @@ echo $( timestamp ): "counts_loss_weight:" $counts_loss_weight | tee -a $logfile
 # modify the bpnet params json to reflect the counts loss weight
 echo  $( timestamp ): "sed -i -e" "s/<>/$counts_loss_weight/g" \
 $project_dir/bpnet_params.json | tee -a $logfile 
-sed -i -e "s/<>/$counts_loss_weight/g" $project_dir/bpnet_params_modified.json
+sed -i -e "s/<>/$counts_loss_weight/g" $project_dir/bpnet_params.json
 
 #set threads based on number of peaks
 
