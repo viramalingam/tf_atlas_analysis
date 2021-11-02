@@ -80,8 +80,7 @@ workflow modelling {
 			chrom_sizes = chrom_sizes,
 			chroms_txt = chroms_txt,
 			bigwigs = bigwigs,
-			peaks = peaks,
-			peaks_for_testing = peaks_for_testing
+			peaks = peaks
  	}
 	output {
 		File bpnet_params_tuned_json = run_tuning.bpnet_params_tuned_json
