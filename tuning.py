@@ -28,7 +28,7 @@ def train_model(learning_rate,counts_loss_weight,args):
     comm += ["--chroms"]
     comm += args.chroms.split(",")
     comm += ["--shuffle"]
-    comm += ["--epochs", "2"]
+    comm += ["--epochs", "5"]
     comm += ["--splits", args.splits]
     comm += ["--model-arch-name", args.model_arch_name]
     comm += ["--model-arch-params-json", "bpnet_params_modified.json"]
@@ -47,7 +47,7 @@ def default_train_model(args):
     
 def get_model_loss(history_file):
     data = json.load(open(history_file, 'r'))
-    loss=data['val_profile_predictions_loss']["1"]+(100*data['val_logcounts_predictions_loss']["1"])
+    loss=data['val_profile_predictions_loss']["5"]+(100*data['val_logcounts_predictions_loss']["5"])
     return -loss
 
 
@@ -92,7 +92,7 @@ def main():
 		return loss
 	        
 	    
-	params_dict = fmin(train_model_and_return_model_loss, pbounds, algo=tpe.suggest, max_evals=2)
+	params_dict = fmin(train_model_and_return_model_loss, pbounds, algo=tpe.suggest, max_evals=40)
 
 	print(params_dict)
 
