@@ -117,9 +117,9 @@ def main():
 
 	with open(args.model_arch_params_json, "r+") as f:
 		text = f.read()
-		text_modified = text.replace("<counts_loss_weight>", str(int(params['counts_loss_weight'])))
-		text_modified = text_modified.replace("<num_dilation_layers>", str(int(params['num_dilation_layers'])))
-		text_modified = text_modified.replace("<filters>", str(int(params['filters'])))
+		text_modified = text.replace("<counts_loss_weight>", str(int(params_dict['counts_loss_weight'])))
+		text_modified = text_modified.replace("<num_dilation_layers>", str(int(params_dict['num_dilation_layers'])))
+		text_modified = text_modified.replace("<filters>", str(int(params_dict['filters'])))
 		print(text_modified)
 		f.close()
 	with open(f"{args.output_dir}/bpnet_params_modified.json","w") as f:
