@@ -223,7 +223,7 @@ if [ "$tuning" = "True" ];then
     # modify the bpnet params json to reflect the counts loss weight
     echo  $( timestamp ): "sed -i -e" "s/<>/$counts_loss_weight/g" \
     $project_dir/bpnet_params.json | tee -a $logfile 
-    sed -i -e "s/<>/$counts_loss_weight/g" $project_dir/bpnet_params_modified.json
+    sed -i -e "s/<>/$counts_loss_weight/g" $project_dir/bpnet_params.json
 fi
 
 
@@ -257,7 +257,7 @@ train \
     --epochs 100 \
     --splits $project_dir/splits.json \
     --model-arch-name BPNet \
-    --model-arch-params-json $project_dir/bpnet_params_modified.json \
+    --model-arch-params-json $project_dir/bpnet_params.json \
     --sequence-generator-name BPNet \
     --model-output-filename $1 \
     --input-seq-len 2114 \
