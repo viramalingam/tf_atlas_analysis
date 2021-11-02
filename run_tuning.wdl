@@ -5,7 +5,6 @@ task run_tuning {
 		String experiment
 		File input_json
 		File training_input_json
-		File testing_input_json
 		File bpnet_params_json
 		File splits_json
 		File reference_file
@@ -14,7 +13,6 @@ task run_tuning {
 		File chroms_txt
 		Array [File] bigwigs
 		File peaks
-		File peaks_for_testing
 
 
   	}	
@@ -30,7 +28,7 @@ task run_tuning {
 		##modelling
 
 		echo "run /my_scripts/tf_atlas_analysis/hyperparameter_tuning.sh" ${experiment} ${input_json} ${training_input_json} ${testing_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} ${peaks_for_testing}
-		/my_scripts/tf_atlas_analysis/hyperparameter_tuning.sh ${experiment} ${input_json} ${training_input_json} ${testing_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} ${peaks_for_testing} ${learning_rate}
+		/my_scripts/tf_atlas_analysis/hyperparameter_tuning.sh ${experiment} ${input_json} ${training_input_json} ${testing_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} ${peaks_for_testing}
 
 		echo "copying all files to cromwell_root folder"
 		
@@ -63,7 +61,6 @@ workflow modelling {
 		String experiment
 		File input_json
 		File training_input_json
-		File testing_input_json
 		File bpnet_params_json
 		File splits_json
 		File reference_file
@@ -72,7 +69,6 @@ workflow modelling {
 		File chroms_txt
 		Array [File] bigwigs
 		File peaks
-		File peaks_for_testing
 
 	}
 
@@ -81,7 +77,6 @@ workflow modelling {
 			experiment = experiment,
 			input_json = input_json,
 			training_input_json = training_input_json,
-			testing_input_json = testing_input_json,
 			bpnet_params_json = bpnet_params_json,
 			splits_json = splits_json,
 			reference_file = reference_file,
