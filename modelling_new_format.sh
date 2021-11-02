@@ -187,7 +187,7 @@ echo $( timestamp ): "counts_loss_weight:" $counts_loss_weight | tee -a $logfile
 # modify the bpnet params json to reflect the counts loss weight
 echo  $( timestamp ): "sed -i -e" "s/<>/$counts_loss_weight/g" \
 $project_dir/bpnet_params.json | tee -a $logfile 
-sed -i -e "s/<>/$counts_loss_weight/g" $project_dir/bpnet_params.json
+sed -i -e "s/<>/$counts_loss_weight/g" $project_dir/bpnet_params_modified.json
 
 #set threads based on number of peaks
 
@@ -195,6 +195,35 @@ if [ $(wc -l < ${data_dir}/${experiment}_combined.bed) -lt 3500 ];then
     threads=1
 else
     threads=2
+fi
+
+if [ "$tuning" = "True" ];then
+    input_data=$project_dir/training_input.json \
+    output_dir=$tuning_dir \
+    reference_genome=$reference_dir/hg38.genome.fa \
+    chrom_sizes=$reference_dir/chrom.sizes \
+    chroms=$(paste -s -d ' ' $reference_dir/hg38_chroms.txt) \
+    splits=$project_dir/splits.json\
+    model_arch_name=BPNET \
+    model_arch_params_json=$project_dir/bpnet_params.json \
+    sequence_generator_name=BPNet \
+    threads=$threads \
+    jupyter nbconvert \
+    --execute tuning.ipynb --to HTML \
+    --output tuning \
+    --ExecutePreprocessor.timeout=-1
+
+    learning_rate=`jq .learning_rate $tuning_dir/tuning_output.json | sed 's/"//g'`
+
+    counts_loss_weight=`jq .counts_loss_weight $tuning_dir/tuning_output.json | sed 's/"//g'`
+    
+    echo "learning_rate="$learning_rate
+    echo "counts_loss_weight="$counts_loss_weight
+
+    # modify the bpnet params json to reflect the counts loss weight
+    echo  $( timestamp ): "sed -i -e" "s/<>/$counts_loss_weight/g" \
+    $project_dir/bpnet_params.json | tee -a $logfile 
+    sed -i -e "s/<>/$counts_loss_weight/g" $project_dir/bpnet_params_modified.json
 fi
 
 
@@ -228,7 +257,7 @@ train \
     --epochs 100 \
     --splits $project_dir/splits.json \
     --model-arch-name BPNet \
-    --model-arch-params-json $project_dir/bpnet_params.json \
+    --model-arch-params-json $project_dir/bpnet_params_modified.json \
     --sequence-generator-name BPNet \
     --model-output-filename $1 \
     --input-seq-len 2114 \
