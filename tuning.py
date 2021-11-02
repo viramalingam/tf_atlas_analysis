@@ -36,7 +36,7 @@ def train_model(learning_rate,counts_loss_weight,num_dilation_layers,filters,arg
     comm += ["--model-output-filename", f'experiment_lr_{str(learning_rate)}_cw_{str(counts_loss_weight)}_n_{str(num_dilation_layers)}_f{str(filters)}']
     comm += ["--input-seq-len", "2114"]
     comm += ["--output-len", "1000"]
-    comm += ["--threads", "2"]
+    comm += ["--threads", args.threads]
     comm += ["--learning-rate", str(learning_rate)]
 
     proc = sp.Popen(" ".join(comm),stderr=sp.PIPE,shell=True)
