@@ -30,8 +30,8 @@ task run_tuning {
 		/my_scripts/tf_atlas_analysis/hyperparameter_tuning.sh ${experiment} ${training_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks}
 		echo "copying all files to cromwell_root folder"
 		
-		cp /project/bpnet_params_modified.json /cromwell_root/bpnet_params_tuned.json
-		cp /project/tuned_learning_rate.txt /cromwell_root/tuned_learning_rate.txt
+		cp /project/tuning/bpnet_params_modified.json /cromwell_root/bpnet_params_tuned.json
+		cp /project/tuning/tuned_learning_rate.txt /cromwell_root/tuned_learning_rate.txt
 		
 	}
 	

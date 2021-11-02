@@ -92,13 +92,13 @@ def main():
 		return loss
 	        
 	    
-	params_dict = fmin(train_model_and_return_model_loss, pbounds, algo=tpe.suggest, max_evals=40)
+	params_dict = fmin(train_model_and_return_model_loss, pbounds, algo=tpe.suggest, max_evals=2)
 
 	print(params_dict)
 
 	params_dict['counts_loss_weight'] = int(params_dict['counts_loss_weight'])
 
-	with open("tuned_learning_rate.txt","w") as f:
+	with open(f"{args.output_dir}/tuned_learning_rate.txt","w") as f:
 		f.write(str(params_dict['learning_rate']))
 
 
@@ -107,7 +107,7 @@ def main():
 		text_modified = text.replace("<counts_loss_weight>", str(int(params_dict['counts_loss_weight'])))
 		print(text_modified)
 		f.close()
-	with open("bpnet_params_modified.json","w") as f:
+	with open(f"{args.output_dir}/bpnet_params_modified.json","w") as f:
 		f.write(text_modified)
 
 
