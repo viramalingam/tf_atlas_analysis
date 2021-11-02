@@ -19,7 +19,7 @@ def parse_args():
     parser.add_argument("--threads") 
     return parser.parse_args()
 
-def train_model(learning_rate,counts_loss_weight,args):
+def train_model(learning_rate,counts_loss_weight,num_dilation_layers,filters,args):
     comm = ["train"]
     comm += ["--input-data", args.input_data]
     comm += ["--output-dir", args.output_dir]
@@ -33,7 +33,7 @@ def train_model(learning_rate,counts_loss_weight,args):
     comm += ["--model-arch-name", args.model_arch_name]
     comm += ["--model-arch-params-json", "bpnet_params_modified.json"]
     comm += ["--sequence-generator-name", args.sequence_generator_name]
-    comm += ["--model-output-filename", f'experiment_lr_{str(learning_rate)}_cw_{str(counts_loss_weight)}']
+    comm += ["--model-output-filename", f'experiment_lr_{str(learning_rate)}_cw_{str(counts_loss_weight)}_n_{str(num_dilation_layers)}_f{str(filters)}']
     comm += ["--input-seq-len", "2114"]
     comm += ["--output-len", "1000"]
     comm += ["--threads", "2"]
@@ -61,7 +61,9 @@ def main():
 
 	pbounds = {
 	    'learning_rate': hp.uniform('learning_rate', 0.00001, 0.01),
-	    'counts_loss_weight': hp.uniform('counts_loss_weight', 10, 10000)
+	    'counts_loss_weight': hp.uniform('counts_loss_weight', 10, 10000),
+	    'filters': hp.uniform('filters', 24, 72),
+	    'num_dilation_layers': hp.uniform('num_dilation_layers', 4, 8)
 	}
 
 	def train_model_and_return_model_loss(params):
@@ -69,6 +71,8 @@ def main():
 		with open(args.model_arch_params_json, "r+") as f:
 			text = f.read()
 			text_modified = text.replace("<counts_loss_weight>", str(int(params['counts_loss_weight'])))
+			text_modified = text_modified.replace("<num_dilation_layers>", str(int(params['num_dilation_layers'])))
+			text_modified = text_modified.replace("<filters>", str(int(params['filters'])))
 			print(text_modified)
 			f.close()
 		with open("bpnet_params_modified.json","w") as f:
@@ -77,18 +81,20 @@ def main():
 
 		res = train_model(params['learning_rate'],params['counts_loss_weight'],args)
 		learning_rate = params['learning_rate']
-		counts_loss_weight =params['counts_loss_weight']
+		counts_loss_weight = params['counts_loss_weight']
+		num_dilation_layers = params['num_dilation_layers']
+		filters = params['filters']
 
 		print(res)
 
-		print(glob.glob(args.output_dir+'/*'))
-
-		history_file=glob.glob(args.output_dir+f'/experiment_lr_{str(learning_rate)}_cw_{str(counts_loss_weight)}'+"*.history.json")[0]
+		history_file=glob.glob(args.output_dir+f'/experiment_lr_{str(learning_rate)}_cw_{str(counts_loss_weight)}_n_{str(num_dilation_layers)}_f{str(filters)}'+"*.history.json")[0]
 
 		loss = get_model_loss(history_file)
 		
 		print(f'experiment_lr_{str(learning_rate)}_cw_{str(counts_loss_weight)}')
 		print(loss)
+
+
 		return loss
 	        
 	    
@@ -97,6 +103,9 @@ def main():
 	print(params_dict)
 
 	params_dict['counts_loss_weight'] = int(params_dict['counts_loss_weight'])
+	params_dict['num_dilation_layers'] = int(params_dict['num_dilation_layers'])
+	params_dict['filters'] = int(params_dict['filters'])
+
 
 	with open(f"{args.output_dir}/tuned_learning_rate.txt","w") as f:
 		f.write(str(params_dict['learning_rate']))
@@ -104,7 +113,9 @@ def main():
 
 	with open(args.model_arch_params_json, "r+") as f:
 		text = f.read()
-		text_modified = text.replace("<counts_loss_weight>", str(int(params_dict['counts_loss_weight'])))
+		text_modified = text.replace("<counts_loss_weight>", str(int(params['counts_loss_weight'])))
+		text_modified = text_modified.replace("<num_dilation_layers>", str(int(params['num_dilation_layers'])))
+		text_modified = text_modified.replace("<filters>", str(int(params['filters'])))
 		print(text_modified)
 		f.close()
 	with open(f"{args.output_dir}/bpnet_params_modified.json","w") as f:
