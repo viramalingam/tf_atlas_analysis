@@ -88,7 +88,7 @@ tee -a $logfile
 
 gunzip ${data_dir}/${experiment}_combined.bed.gz
 
-
+ls ${data_dir}/
 
 echo number of peaks in $peaks `zcat ${data_dir}/${experiment}_combined.bed | wc -l`
 
@@ -133,7 +133,7 @@ else
 fi
 
 echo $( timestamp ):"
-python tuning.py \
+python /my_scripts/tf_atlas_analysis/tuning.py \
     --input-data $project_dir/training_input.json \
     --output-dir $tuning_dir \
     --reference-genome $reference_dir/hg38.genome.fa \
@@ -145,7 +145,7 @@ python tuning.py \
     --sequence-generator-name BPNet \
     --threads $threads" | tee -a $logfile 
 
-python tuning.py \
+python /my_scripts/tf_atlas_analysis/tuning.py \
     --input-data $project_dir/training_input.json \
     --output-dir $tuning_dir \
     --reference-genome $reference_dir/hg38.genome.fa \
