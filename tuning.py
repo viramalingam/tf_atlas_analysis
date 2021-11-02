@@ -79,7 +79,11 @@ def main():
 			f.write(text_modified)
  
 
-		res = train_model(params['learning_rate'],params['counts_loss_weight'],args)
+		res = train_model(learning_rate=params['learning_rate'],
+						  counts_loss_weight=params['counts_loss_weight'],
+						  num_dilation_layers=params['num_dilation_layers'],
+						  filters=params['filters'],
+						  args=args)
 		learning_rate = params['learning_rate']
 		counts_loss_weight = params['counts_loss_weight']
 		num_dilation_layers = params['num_dilation_layers']
