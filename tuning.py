@@ -61,9 +61,9 @@ def main():
 
 	pbounds = {
 	    'learning_rate': hp.uniform('learning_rate', 0.0001, 0.01),
-	    'counts_loss_weight': hp.uniform('counts_loss_weight', 10, 10000),
-	    'filters': hp.uniform('filters', 24, 72),
-	    'num_dilation_layers': hp.choice('num_dilation_layers', (4, 5, 6, 7, 8))
+	    'counts_loss_weight': hp.quniform('counts_loss_weight', 10, 10000, 1),
+	    'filters': hp.quniform('filters', 24, 72, 1),
+	    'num_dilation_layers': hp.quniform('num_dilation_layers', 4, 8, 1)
 	}
 
 	def train_model_and_return_model_loss(params):
