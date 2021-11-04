@@ -237,11 +237,17 @@ train \
     --reverse-complement-augmentation \
     --learning-rate $learning_rate
 
+#get the test chromosome
+
+echo "test_chromosome=`jq .["0"]["test"][0] $project_dir/splits.json | sed 's/"//g'`"
+
+test_chromosome=`jq .["0"]["test"][0] $project_dir/splits.json | sed 's/"//g'` 
+
 echo $( timestamp ): "
 fastpredict \\
     --model $model_dir/${1}_split000.h5 \\
     --chrom-sizes $reference_dir/chrom.sizes \\
-    --chroms chr1 \\
+    --chroms $test_chromosome \\
     --reference-genome $reference_dir/hg38.genome.fa \\
     --output-dir $predictions_dir_all_peaks_test_chroms \\
     --input-data $project_dir/input.json \\
@@ -255,7 +261,7 @@ fastpredict \\
 fastpredict \
     --model $model_dir/${1}_split000.h5 \
     --chrom-sizes $reference_dir/chrom.sizes \
-    --chroms chr1 \
+    --chroms $test_chromosome \
     --reference-genome $reference_dir/hg38.genome.fa \
     --output-dir $predictions_dir_all_peaks_test_chroms \
     --input-data $project_dir/input.json \
@@ -304,7 +310,7 @@ echo $( timestamp ): "
 fastpredict \\
     --model $model_dir/${1}_split000.h5 \\
     --chrom-sizes $reference_dir/chrom.sizes \\
-    --chroms chr1 \\
+    --chroms $test_chromosome \\
     --reference-genome $reference_dir/hg38.genome.fa \\
     --output-dir $predictions_dir_test_peaks_test_chroms \\
     --input-data $project_dir/testing_input.json \\
@@ -318,7 +324,7 @@ fastpredict \\
 fastpredict \
     --model $model_dir/${1}_split000.h5 \
     --chrom-sizes $reference_dir/chrom.sizes \
-    --chroms chr1 \
+    --chroms $test_chromosome \
     --reference-genome $reference_dir/hg38.genome.fa \
     --output-dir $predictions_dir_test_peaks_test_chroms \
     --input-data $project_dir/testing_input.json \
