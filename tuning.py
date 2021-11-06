@@ -44,13 +44,14 @@ def train_model(learning_rate,counts_loss_weight,num_dilation_layers,filters,arg
     return proc.communicate()
 
 def default_train_model(args):
+	
 	return train_model
-    
+
 def get_model_loss(history_file):
-    data = json.load(open(history_file, 'r'))
+	data = json.load(open(history_file, 'r'))
     losses = []
-	for i in range(1,11):
-		losses.append(data['val_profile_predictions_loss'][str(i)]+(100*data['val_logcounts_predictions_loss'][str(i)]))
+    for i in range(1,11):
+    	losses.append(data['val_profile_predictions_loss'][str(i)]+(100*data['val_logcounts_predictions_loss'][str(i)]))
 	loss = min(losses)
 	return loss
 
