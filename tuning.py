@@ -50,10 +50,10 @@ def get_model_loss(history_file):
     data = json.load(open(history_file, 'r'))
     losses = []
 	for i in range(1,11):
-	    losses.append(data['val_profile_predictions_loss'][str(i)]+(100*data['val_logcounts_predictions_loss'][str(i)]))
+		losses.append(data['val_profile_predictions_loss'][str(i)]+(100*data['val_logcounts_predictions_loss'][str(i)]))
 	loss = min(losses)
-    return loss
-    
+	return loss
+
 
 
 
