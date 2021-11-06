@@ -108,7 +108,7 @@ def main():
 		return loss
 	        
 	    
-	params_dict = fmin(train_model_and_return_model_loss, pbounds, algo=hyperopt.random.suggest, max_evals=30)
+	params_dict = fmin(train_model_and_return_model_loss, pbounds, algo=hyperopt.rand.suggest, max_evals=30)
 
 	print(params_dict)
 
