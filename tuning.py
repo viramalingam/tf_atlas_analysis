@@ -3,6 +3,7 @@ import subprocess as sp
 import json
 import glob
 from hyperopt import fmin, tpe, hp
+import hyperopt
 import argparse
 
 def parse_args():
@@ -28,7 +29,7 @@ def train_model(learning_rate,counts_loss_weight,num_dilation_layers,filters,arg
     comm += ["--chroms"]
     comm += args.chroms.split(",")
     comm += ["--shuffle"]
-    comm += ["--epochs", "5"]
+    comm += ["--epochs", "10"]
     comm += ["--splits", args.splits]
     comm += ["--model-arch-name", args.model_arch_name]
     comm += ["--model-arch-params-json", "bpnet_params_modified.json"]
@@ -47,7 +48,7 @@ def default_train_model(args):
     
 def get_model_loss(history_file):
     data = json.load(open(history_file, 'r'))
-    loss=data['val_profile_predictions_loss']["5"]+(100*data['val_logcounts_predictions_loss']["5"])
+    loss=data['val_profile_predictions_loss']["10"]+(100*data['val_logcounts_predictions_loss']["10"])
     return -loss
 
 
@@ -63,7 +64,7 @@ def main():
 	    'learning_rate': hp.uniform('learning_rate', 0.0001, 0.01),
 	    'counts_loss_weight': hp.quniform('counts_loss_weight', 10, 10000, 1),
 	    'filters': hp.quniform('filters', 24, 72, 1),
-	    'num_dilation_layers': hp.quniform('num_dilation_layers', 3, 8, 1)
+	    'num_dilation_layers': hp.quniform('num_dilation_layers', 4, 8, 1)
 	}
 
 	def train_model_and_return_model_loss(params):
@@ -102,7 +103,7 @@ def main():
 		return loss
 	        
 	    
-	params_dict = fmin(train_model_and_return_model_loss, pbounds, algo=tpe.suggest, max_evals=50)
+	params_dict = fmin(train_model_and_return_model_loss, pbounds, algo=hyperopt.random.suggest, max_evals=30)
 
 	print(params_dict)
 
