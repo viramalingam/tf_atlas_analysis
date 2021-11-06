@@ -53,6 +53,7 @@ def get_model_loss(history_file):
 	    losses.append(data['val_profile_predictions_loss'][str(i)]+(100*data['val_logcounts_predictions_loss'][str(i)]))
 	loss = min(losses)
     return loss
+    
 
 
 
