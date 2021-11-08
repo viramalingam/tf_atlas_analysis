@@ -38,6 +38,7 @@ def train_model(learning_rate,counts_loss_weight,num_dilation_layers,filters,arg
     comm += ["--input-seq-len", "2114"]
     comm += ["--output-len", "1000"]
     comm += ["--threads", args.threads]
+    comm += ["--early-stopping-patience", 11]
     comm += ["--learning-rate", str(learning_rate)]
 
     proc = sp.Popen(" ".join(comm),stderr=sp.PIPE,shell=True)
