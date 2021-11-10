@@ -18,6 +18,7 @@ chrom_sizes=$7
 chroms_txt=${8}
 bigwigs=${9}
 peaks=${10}
+tuning_algorithm=${11}
 
 # create the log file
 logfile=$project_dir/${1}_tuning.log
@@ -143,7 +144,8 @@ python /my_scripts/tf_atlas_analysis/tuning.py \
     --model-arch-name BPNet \
     --model-arch-params-json $project_dir/bpnet_params.json \
     --sequence-generator-name BPNet \
-    --threads $threads" | tee -a $logfile 
+    --threads $threads
+    --algorithm $tuning_algorithm" | tee -a $logfile 
 
 python /my_scripts/tf_atlas_analysis/tuning.py \
     --input-data $project_dir/training_input.json \
@@ -156,3 +158,4 @@ python /my_scripts/tf_atlas_analysis/tuning.py \
     --model-arch-params-json $project_dir/bpnet_params.json \
     --sequence-generator-name BPNet \
     --threads $threads
+    --algorithm $tuning_algorithm

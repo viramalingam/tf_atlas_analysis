@@ -17,7 +17,8 @@ def parse_args():
     parser.add_argument("--model-arch-name")
     parser.add_argument("--model-arch-params-json")
     parser.add_argument("--sequence-generator-name") 
-    parser.add_argument("--threads") 
+    parser.add_argument("--threads")
+    parser.add_argument("--algorithm") 
     return parser.parse_args()
 
 def train_model(learning_rate,counts_loss_weight,num_dilation_layers,filters,args):
@@ -73,43 +74,55 @@ def main():
 	    'num_dilation_layers': hp.quniform('num_dilation_layers', 4, 8, 1)
 	}
 
-	def train_model_and_return_model_loss(params):
+	class train_model_and_return_model_loss:
 
-		with open(args.model_arch_params_json, "r+") as f:
-			text = f.read()
-			text_modified = text.replace("<counts_loss_weight>", str(int(params['counts_loss_weight'])))
-			text_modified = text_modified.replace("<num_dilation_layers>", str(int(params['num_dilation_layers'])))
-			text_modified = text_modified.replace("<filters>", str(int(params['filters'])))
-			print(text_modified)
-			f.close()
-		with open("bpnet_params_modified.json","w") as f:
-			f.write(text_modified)
- 
-
-		res = train_model(learning_rate=params['learning_rate'],
-						  counts_loss_weight=params['counts_loss_weight'],
-						  num_dilation_layers=params['num_dilation_layers'],
-						  filters=params['filters'],
-						  args=args)
-		learning_rate = params['learning_rate']
-		counts_loss_weight = params['counts_loss_weight']
-		num_dilation_layers = params['num_dilation_layers']
-		filters = params['filters']
-
-		print(res)
-
-		history_file=glob.glob(args.output_dir+f'/experiment_lr_{str(learning_rate)}_cw_{str(counts_loss_weight)}_n_{str(num_dilation_layers)}_f{str(filters)}'+"*.history.json")[0]
-
-		loss = get_model_loss(history_file)
-		
-		print(f'experiment_lr_{str(learning_rate)}_cw_{str(counts_loss_weight)}')
-		print(loss)
+		def __init__(self, args):
+			self.args = args
 
 
-		return loss
-	        
+		def __call__(self, params):
+
+			with open(args.model_arch_params_json, "r+") as f:
+				text = f.read()
+				text_modified = text.replace("<counts_loss_weight>", str(int(params['counts_loss_weight'])))
+				text_modified = text_modified.replace("<num_dilation_layers>", str(int(params['num_dilation_layers'])))
+				text_modified = text_modified.replace("<filters>", str(int(params['filters'])))
+				print(text_modified)
+				f.close()
+			with open("bpnet_params_modified.json","w") as f:
+				f.write(text_modified)
+	 
+
+			res = train_model(learning_rate=params['learning_rate'],
+							  counts_loss_weight=params['counts_loss_weight'],
+							  num_dilation_layers=params['num_dilation_layers'],
+							  filters=params['filters'],
+							  args=self.args)
+			learning_rate = params['learning_rate']
+			counts_loss_weight = params['counts_loss_weight']
+			num_dilation_layers = params['num_dilation_layers']
+			filters = params['filters']
+
+			print(res)
+
+			history_file=glob.glob(args.output_dir+f'/experiment_lr_{str(learning_rate)}_cw_{str(counts_loss_weight)}_n_{str(num_dilation_layers)}_f{str(filters)}'+"*.history.json")[0]
+
+			loss = get_model_loss(history_file)
+			
+			print(f'experiment_lr_{str(learning_rate)}_cw_{str(counts_loss_weight)}')
+			print(loss)
+
+
+			return loss
+
+	loss_function = train_model_and_return_model_loss(args)
 	    
-	params_dict = fmin(train_model_and_return_model_loss, pbounds, algo=hyperopt.rand.suggest, max_evals=30)
+	if args.algorithm == 'random':
+		params_dict = fmin(loss_function, pbounds, algo=hyperopt.rand.suggest, max_evals=30)
+	elif args.algorithm == 'tpe_suggest':
+		params_dict = fmin(loss_function, pbounds, algo=tpe.suggest, max_evals=30)
+	else:
+		raise Exception("Sorry, hyperopt algorithm not supported")
 
 	print(params_dict)
 
