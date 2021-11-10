@@ -27,8 +27,8 @@ task run_tuning {
 
 		##modelling
 
-		echo "run /my_scripts/tf_atlas_analysis/hyperparameter_tuning.sh" ${experiment} ${training_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} $tuning_algorithm
-		/my_scripts/tf_atlas_analysis/hyperparameter_tuning.sh ${experiment} ${training_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} $tuning_algorithm
+		echo "run /my_scripts/tf_atlas_analysis/hyperparameter_tuning.sh" ${experiment} ${training_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} ${tuning_algorithm}
+		/my_scripts/tf_atlas_analysis/hyperparameter_tuning.sh ${experiment} ${training_input_json} ${bpnet_params_json} ${splits_json} ${reference_file} ${reference_file_index} ${chrom_sizes} ${chroms_txt} ${sep=',' bigwigs} ${peaks} ${tuning_algorithm}
 		echo "copying all files to cromwell_root folder"
 		
 		cp /project/tuning/bpnet_params_modified.json /cromwell_root/bpnet_params_tuned.json
