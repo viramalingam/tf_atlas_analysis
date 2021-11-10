@@ -122,7 +122,7 @@ def main():
 	elif args.algorithm == 'tpe_suggest':
 		params_dict = fmin(loss_function, pbounds, algo=tpe.suggest, max_evals=30)
 	else:
-		raise Exception("Sorry, hyperopt algorithm not supported")
+		raise Exception(f"Sorry, hyperopt algorithm {args.algorithm} not supported")
 
 	print(params_dict)
 

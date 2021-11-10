@@ -144,7 +144,7 @@ python /my_scripts/tf_atlas_analysis/tuning.py \
     --model-arch-name BPNet \
     --model-arch-params-json $project_dir/bpnet_params.json \
     --sequence-generator-name BPNet \
-    --threads $threads
+    --threads $threads \
     --algorithm $tuning_algorithm" | tee -a $logfile 
 
 python /my_scripts/tf_atlas_analysis/tuning.py \
@@ -157,5 +157,5 @@ python /my_scripts/tf_atlas_analysis/tuning.py \
     --model-arch-name BPNet \
     --model-arch-params-json $project_dir/bpnet_params.json \
     --sequence-generator-name BPNet \
-    --threads $threads
+    --threads $threads \
     --algorithm $tuning_algorithm
