@@ -54,10 +54,6 @@ task run_modelling {
 		Array[File] predictions_and_metrics_test_peaks_test_chroms = glob("predictions_and_metrics_test_peaks_test_chroms/*")
 		Array[File] predictions_and_metrics_all_peaks_all_chroms = glob("predictions_and_metrics_all_peaks_all_chroms/*")
 		Array[File] predictions_and_metrics_all_peaks_test_chroms = glob("predictions_and_metrics_all_peaks_test_chroms/*")
-
-		Float spearman = read_float("spearman.txt")
-		Float pearson = read_float("pearson.txt")
-		Float jsd = read_float("jsd.txt")
 	
 	
 	}
@@ -115,9 +111,7 @@ workflow modelling {
 		Array[File] predictions_and_metrics_all_peaks_test_chroms = run_modelling.predictions_and_metrics_all_peaks_test_chroms
 		Array[File] predictions_and_metrics_test_peaks_test_chroms = run_modelling.predictions_and_metrics_test_peaks_test_chroms
 		Array[File] predictions_and_metrics_all_peaks_all_chroms = run_modelling.predictions_and_metrics_all_peaks_all_chroms
-		Float spearman = run_modelling.spearman
-		Float pearson = run_modelling.pearson
-		Float jsd = run_modelling.jsd
+
 		
 	}
 }
