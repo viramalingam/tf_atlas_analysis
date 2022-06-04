@@ -90,6 +90,7 @@ else
         all_bams_for_merging+=( ${bam_file_path} )
     done
 fi
+ls -l $intermediates_dir
 
 if [ ${#all_bams_for_merging[*]} -gt 1 ]
 then
